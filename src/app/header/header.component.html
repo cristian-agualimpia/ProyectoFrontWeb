@@ -1,1 +1,35 @@
-<p>header works!</p>
+<header class="w-full bg-gray-900 text-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-4">
+    <!-- Logo -->
+    <div class="flex items-center space-x-4">
+        <a href="#" class="text-2xl font-bold">CheeseRun</a>
+    </div>
+
+    <!-- Navigation Links (Desktop) -->
+    <nav class="hidden md:flex space-x-8">
+        <a href="#" class="text-gray-300 hover:text-white">Inicio</a>
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <div class="md:hidden">
+        <button (click)="toggleMobileMenu()" class="text-gray-400 hover:text-white focus:outline-none">
+        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+        </button>
+    </div>
+    </div>
+</div>
+
+<!-- Mobile Navigation Menu -->
+<div [class.hidden]="!isMobileMenuOpen" class="md:hidden">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+    <a href="#" class="block text-gray-300 hover:text-white">Inicio</a>
+    </div>
+</div>
+
+<!-- Barra de Búsqueda de Arrendatario -->
+<app-barra-busqueda-arrendatario *ngIf="showSearchBar"></app-barra-busqueda-arrendatario>
+</header>
+  
