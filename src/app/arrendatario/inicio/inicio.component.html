@@ -17,10 +17,16 @@
 </div>
 
 <!-- Sección para el botón "Mi cuenta" -->
-<div class="w-16 bg-gray-900 text-white flex flex-col items-center justify-center">
-    <button class="transform rotate-90 text-sm font-bold text-white hover:text-gray-300 focus:outline-none">
-    Mi Cuenta
+<div class="fixed inset-y-0 right-4 flex items-center z-10">
+    <button (click)="mostrarCuenta()" class="bg-gray-900 text-white font-bold h-64 w-10 flex flex-col justify-center items-center rounded-l-full rounded-r-none hover:bg-gray-700 focus:outline-none">
+        <span class="transform rotate-90">M</span>
+        <span class="transform rotate-90">i</span>
+        <span class="transform rotate-90">C</span>
+        <span class="transform rotate-90">u</span>
+        <span class="transform rotate-90">e</span>
+        <span class="transform rotate-90">n</span>
+        <span class="transform rotate-90">t</span>
+        <span class="transform rotate-90">a</span>
     </button>
+    <app-vertical-arrendatario *ngIf="verCuenta"></app-vertical-arrendatario>
 </div>
-</div>
-  
