@@ -1,0 +1,21 @@
+<div class="max-w-sm border border-gray-200 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 cursor-pointer transform hover:scale-105">
+  <!-- Imagen de la propiedad con efecto de zoom al hover -->
+  <div class="relative overflow-hidden">
+    <img [src]="imagenUrl" alt="Imagen de la propiedad" class="w-full h-56 object-cover transform transition-transform duration-300 hover:scale-105">
+  </div>
+  
+  <!-- Contenido de la tarjeta -->
+  <div class="p-5">
+    <!-- Nombre de la propiedad -->
+    <h3 class="text-xl font-semibold text-gray-900 truncate">{{ nombre }}</h3>
+    
+    <!-- Descripción corta de la propiedad -->
+    <p class="text-gray-500 mt-2 text-sm leading-relaxed">{{ descripcion }}</p>
+    
+    <!-- Precio por noche -->
+    <div class="flex justify-between items-center mt-4">
+      <p class="text-lg font-bold text-gray-800">Precio por noche:</p>
+      <p class="text-lg font-bold text-rose-500">${{ precio }}</p>
+    </div>
+  </div>
+</div>

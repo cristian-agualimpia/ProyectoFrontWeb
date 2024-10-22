@@ -4,21 +4,26 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { BarraBusquedaComponent } from "../arrendador/barra-busqueda/barra-busqueda.component";
 import { BarraBusquedaComponentArrendatario } from '../arrendatario/barra-busqueda/barra-busqueda.component';
+import { VerticalComponentArrendatario } from "../arrendatario/vertical/vertical.component";
+import { VerticalComponentArrendador } from '../arrendador/vertical/vertical.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, BarraBusquedaComponentArrendatario, BarraBusquedaComponent], // Asegúrate de agregar CommonModule aquí
+  imports: [CommonModule, BarraBusquedaComponentArrendatario, BarraBusquedaComponent, VerticalComponentArrendatario, VerticalComponentArrendador],
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit {
-  verBarraBusqueda:boolean = true; // Estado para mostrar la barra de búsqueda
-  verBusquedaArrendatario:boolean = false;
-  verBusquedaArrendador:boolean = false;  
-  rolArrendatario:boolean = true;
-  verInicio:boolean = true;
- 
-  constructor(private router: Router) {}
+  verBarraBusqueda: boolean = true; // Estado para mostrar la barra de búsqueda
+  verBusquedaArrendatario: boolean = false;
+  verBusquedaArrendador: boolean = false;
+  rolArrendatario: boolean = true;
+  verInicio: boolean = true;
+  verCuenta: boolean = false;
+  isDropdownOpen: boolean = false; // Estado para mostrar el dropdown
+  isLoggedIn: boolean = true; // Estado para verificar si la sesión está iniciada
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.router.events
@@ -33,8 +38,7 @@ export class HeaderComponent implements OnInit {
           this.rolArrendatario = false; // Mostrar barra de búsqueda para arrendatario
         } else {
           this.verInicio = true; // Ocultar inicio / mostrar boton ver barra de busqueda
-        } 
-
+        }
       });
   }
 
@@ -45,5 +49,13 @@ export class HeaderComponent implements OnInit {
     } else {
       this.verBusquedaArrendador = this.verBarraBusqueda;
     }
+  }
+
+  mostrarCuenta() {
+    this.verCuenta = !this.verCuenta;
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 }

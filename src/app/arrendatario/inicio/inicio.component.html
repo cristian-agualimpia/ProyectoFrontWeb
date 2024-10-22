@@ -1,32 +1,7 @@
 <div class="flex">
-<!-- Sección de listado de propiedades -->
-<div class="flex-1 overflow-y-auto h-screen p-4">
+  <!-- Sección de listado de propiedades -->
+  <div class="flex-1 overflow-y-auto h-screen p-4 mt-16">
     <h2 class="text-2xl font-bold mb-4">Propiedades</h2>
-    <div class="space-y-4">
-    <!-- Ejemplo de propiedad -->
-    <div class="flex border border-gray-300 rounded-lg p-4 shadow-sm">
-        <img src="https://via.placeholder.com/150" alt="Imagen de la propiedad" class="w-32 h-32 object-cover rounded-l-lg">
-        <div class="ml-4 flex-1">
-        <h3 class="text-lg font-semibold">Nombre de la Propiedad</h3>
-        <p class="text-gray-600">Descripción corta de la propiedad, incluyendo características como número de habitaciones, baños, etc.</p>
-        <p class="text-green-600 font-bold">Precio por noche: $X</p>
-        </div>
-    </div>
-    <!-- Puedes repetir este bloque para mostrar más propiedades -->
-    </div>
-</div>
-
-<!-- Sección para el botón "Mi cuenta" -->
-<div class="fixed inset-y-0 right-4 flex items-center z-10">
-    <button (click)="mostrarCuenta()" class="bg-gray-900 text-white font-bold h-64 w-10 flex flex-col justify-center items-center rounded-l-full rounded-r-none hover:bg-gray-700 focus:outline-none">
-        <span class="transform rotate-90">M</span>
-        <span class="transform rotate-90">i</span>
-        <span class="transform rotate-90">C</span>
-        <span class="transform rotate-90">u</span>
-        <span class="transform rotate-90">e</span>
-        <span class="transform rotate-90">n</span>
-        <span class="transform rotate-90">t</span>
-        <span class="transform rotate-90">a</span>
-    </button>
-    <app-vertical-arrendatario *ngIf="verCuenta"></app-vertical-arrendatario>
+    <app-lista-propiedades></app-lista-propiedades>
+  </div>
 </div>
