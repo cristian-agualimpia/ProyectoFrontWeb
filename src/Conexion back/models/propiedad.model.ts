@@ -4,7 +4,7 @@ export interface Propiedad {
     ubicacion:string;
     parqueadero:boolean;
     piscina:boolean;
-    cuartos:boolean;
+    cuartos:number;
     camas:number;
     area:number;
     capacidad:number;

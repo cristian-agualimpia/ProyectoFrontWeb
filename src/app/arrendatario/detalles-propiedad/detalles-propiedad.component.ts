@@ -2,17 +2,18 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Propiedad } from '../../../Conexion back/models/propiedad.model';
 import { PropiedadService } from '../../../Conexion back/services/propiedad.service';
+import { AlquilerComponent } from '../alquiler/alquiler.component';
 
 @Component({
   selector: 'app-detalles-propiedad-arrendatario',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AlquilerComponent],
   templateUrl: './detalles-propiedad.component.html',
   styleUrl: './detalles-propiedad.component.css'
 })
 
 export class DetallesPropiedadComponentArrendatario implements OnInit {
-  propiedadPedida?: Propiedad;
+  calificacionPromedio: number = 5;
   propiedad: any = {
     nombre: 'Casa de Playa',
     ubicacion: 'Cancún, México',
@@ -41,7 +42,22 @@ export class DetallesPropiedadComponentArrendatario implements OnInit {
     ]
   };
   
+  propiedadPedida?: Propiedad;
+
   imagenActual: number = 0;
+
+  //MOSTRAR ALQUILER Y PAGO
+  mostrarFormularioAlquiler: boolean = false;
+
+  abrirFormularioAlquiler() {
+    this.mostrarFormularioAlquiler = true;
+    console.log("Se trató de abrir el formulario de alquiler")
+  }
+
+  cerrarFormularioAlquiler() {
+    this.mostrarFormularioAlquiler = false;
+  }
+
 
   constructor(
     private propiedadService: PropiedadService,
