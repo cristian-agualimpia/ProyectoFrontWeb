@@ -1,46 +1,55 @@
-import { CommonModule } from '@angular/common'; // Importar CommonModule
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { BarraBusquedaComponent } from "../arrendador/barra-busqueda/barra-busqueda.component";
+import { PropiedadService } from '../../Conexion back/services/propiedad.service'; // Usamos PropiedadService
+import { BarraBusquedaComponent } from '../arrendador/barra-busqueda/barra-busqueda.component';
+import { VerticalComponentArrendador } from "../arrendador/vertical/vertical.component";
 import { BarraBusquedaComponentArrendatario } from '../arrendatario/barra-busqueda/barra-busqueda.component';
 import { VerticalComponentArrendatario } from "../arrendatario/vertical/vertical.component";
-import { VerticalComponentArrendador } from '../arrendador/vertical/vertical.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, BarraBusquedaComponentArrendatario, BarraBusquedaComponent, VerticalComponentArrendatario, VerticalComponentArrendador],
+  imports: [CommonModule, BarraBusquedaComponentArrendatario, VerticalComponentArrendatario, BarraBusquedaComponent, VerticalComponentArrendador],
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit {
-  verBarraBusqueda: boolean = true; // Estado para mostrar la barra de búsqueda
+  verBarraBusqueda: boolean = true;
   verBusquedaArrendatario: boolean = false;
   verBusquedaArrendador: boolean = false;
   rolArrendatario: boolean = true;
   verInicio: boolean = true;
   verCuenta: boolean = false;
-  isDropdownOpen: boolean = false; // Estado para mostrar el dropdown
-  isLoggedIn: boolean = true; // Estado para verificar si la sesión está iniciada
+  isDropdownOpen: boolean = false;
+  isLoggedIn: boolean = true;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private propiedadService: PropiedadService // Usamos propiedadService para los filtros
+  ) { }
 
   ngOnInit() {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        // Verifica la URL y actualiza el estado de verBusquedaArrendatario
         if (event.url.includes('/arrendatario')) {
-          this.verInicio = false; // Mostrar botón inicio
-          this.rolArrendatario = true; // Mostrar barra de búsqueda para arrendatario
+          this.verInicio = false;
+          this.rolArrendatario = true;
         } else if (event.url.includes('/arrendador')) {
-          this.verInicio = false; // Mostrar botón inicio
-          this.rolArrendatario = false; // Mostrar barra de búsqueda para arrendatario
+          this.verInicio = false;
+          this.rolArrendatario = false;
         } else {
-          this.verInicio = true; // Ocultar inicio / mostrar boton ver barra de busqueda
+          this.verInicio = true;
         }
       });
   }
+   /*
+  aplicarFiltros(filtro: any) {
+    // Aplicamos los filtros localmente a través del propiedadService
+    this.propiedadService.aplicarFiltros(filtro);
+  }
+    */
 
   mostrarBusqueda() {
     this.verBarraBusqueda = !this.verBarraBusqueda;

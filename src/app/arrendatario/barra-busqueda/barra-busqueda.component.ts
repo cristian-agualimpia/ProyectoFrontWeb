@@ -1,14 +1,41 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { PropiedadService } from '../../../Conexion back/services/propiedad.service';
 
 @Component({
   selector: 'app-barra-busqueda-arrendatario',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './barra-busqueda.component.html',
   styleUrls: ['./barra-busqueda.component.css']
 })
 export class BarraBusquedaComponentArrendatario {
+
+  //APLICAR FILTROS DE BÚSQUEDA
+  capacidad: number = 0;
+  mostrarDisponibles: boolean = true;
+  parqueadero: boolean = false;
+  piscina: boolean = false;
+
+  // Emitir evento con todos los filtros
+ // @Output() filtroAplicado = new EventEmitter<{ capacidad?: number, disponibles?: boolean, parqueadero?: boolean, piscina?: boolean }>();
+
+  constructor(
+    private propiedadService: PropiedadService // Usamos propiedadService para los filtros
+  ) { }
+
+  aplicarFiltros() {
+    this.capacidad = this.adultos + this.ninos + this.bebes + this.mascotas;
+    this.propiedadService.aplicarFiltros({
+      capacidad: this.capacidad,
+      disponibles: this.mostrarDisponibles,
+      parqueadero: this.parqueadero,
+      piscina: this.piscina
+    });
+    this.propiedadService.ocultarDetalles()
+  }
+
   // Variable para controlar si el dropdown está abierto o cerrado
   isDropdownOpen: boolean = false;
 
@@ -46,6 +73,7 @@ export class BarraBusquedaComponentArrendatario {
 
   aumentarNinos() {
     this.ninos++;
+    
   }
 
   disminuirNinos() {

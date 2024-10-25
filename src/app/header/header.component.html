@@ -28,7 +28,7 @@
             </svg>
           </button>
           <!-- Dropdown -->
-          <div *ngIf="isDropdownOpen" class="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg py-2 z-20">
+          <div *ngIf="isDropdownOpen" class="absolute right-0 mt-2 w-64 bg-FondoCrema2 rounded-md shadow-lg py-2 z-20">
             <ng-container *ngIf="isLoggedIn; else notLoggedIn">
               <ng-container *ngIf="rolArrendatario; else arrendadorDropdown">
                 <app-vertical-arrendatario></app-vertical-arrendatario>
@@ -56,6 +56,6 @@
     </div>
   </div>
   <!-- Barra de Búsqueda de Arrendatario -->
-  <app-barra-busqueda-arrendatario *ngIf="verBusquedaArrendatario"></app-barra-busqueda-arrendatario>
-  <app-barra-busqueda-arrendador *ngIf="verBusquedaArrendador"></app-barra-busqueda-arrendador>
+  <app-barra-busqueda-arrendatario *ngIf="verBusquedaArrendatario"></app-barra-busqueda-arrendatario >
+  <app-barra-busqueda-arrendador *ngIf="verBusquedaArrendador" ></app-barra-busqueda-arrendador>
 </header>

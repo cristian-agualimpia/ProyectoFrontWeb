@@ -1,12 +1,15 @@
 <div class="flex justify-center">
   <div class="w-full max-w-7xl p-4">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <app-card-propiedad *ngFor="let propiedad of propiedades"
+      <!-- PENDIENTE: METER DESCRIPCION E IMAGEN EN BACKEND -->
+      <app-card-propiedad-arrendatario *ngFor="let propiedad of propiedades"
                           [nombre]="propiedad.nombre"
-                          [descripcion]="propiedad.descripcion"
-                          [precio]="propiedad.precio"
-                          [imagenUrl]="propiedad.imagenUrl">
-      </app-card-propiedad>
+                          [descripcion]='descripcionGenerica'
+                          [precio]="propiedad.precioXnoche"
+                          [imagenUrl]="imagenGenerica"
+                          [id]="propiedad.id">
+                          
+      </app-card-propiedad-arrendatario>
     </div>
   </div>
 </div>
