@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BotonVerticalComponent } from './boton-vertical.component';
+import { ListaDeseosComponent } from './lista-deseos.component';
 
-describe('BotonVerticalComponent', () => {
-  let component: BotonVerticalComponent;
-  let fixture: ComponentFixture<BotonVerticalComponent>;
+describe('ListaDeseosComponent', () => {
+  let component: ListaDeseosComponent;
+  let fixture: ComponentFixture<ListaDeseosComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BotonVerticalComponent]
+      imports: [ListaDeseosComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BotonVerticalComponent);
+    fixture = TestBed.createComponent(ListaDeseosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
