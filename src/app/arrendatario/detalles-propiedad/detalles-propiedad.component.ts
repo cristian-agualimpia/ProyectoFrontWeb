@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Arrendador } from '../../../Conexion back/models/arrendador.model';
 import { Propiedad } from '../../../Conexion back/models/propiedad.model';
 import { ArrendadorService } from '../../../Conexion back/services/arrendador.service';
+import { CalificacionService } from '../../../Conexion back/services/calificacion.service';
 import { PropiedadService } from '../../../Conexion back/services/propiedad.service';
 import { AlquilerComponent } from '../alquiler/alquiler.component';
-import { Arrendador } from '../../../Conexion back/models/arrendador.model';
 
 @Component({
   selector: 'app-detalles-propiedad-arrendatario',
@@ -40,8 +41,6 @@ export class DetallesPropiedadComponentArrendatario implements OnInit {
       'https://via.placeholder.com/400x300?text=Casa+7',
     ],
     calificaciones: [
-      { usuario: 'Ana', comentario: 'Excelente lugar para descansar.', estrellas: 5 },
-      { usuario: 'Pedro', comentario: 'Muy limpio y cómodo.', estrellas: 4 },
     ]
   };
   
@@ -59,7 +58,8 @@ export class DetallesPropiedadComponentArrendatario implements OnInit {
 
   constructor(
     private propiedadService: PropiedadService,
-    private arrendadorService: ArrendadorService
+    private arrendadorService: ArrendadorService,
+    private calificacionService: CalificacionService
   ) {
     this.propiedadService.idPropiedad$.subscribe(id => {
       this.idP = id !== null ? id : 0; 
@@ -75,6 +75,10 @@ export class DetallesPropiedadComponentArrendatario implements OnInit {
             this.arrendadorService.obtenerArrendador(this.propiedadPedida.arrendadorId).subscribe((arrendador: Arrendador) => {
               this.arrendadorNombre = arrendador.nombre;
               this.propiedad.arrendadorNombre = this.arrendadorNombre; 
+            });
+            this.calificacionService.getCalificacionesByPropiedadId(this.propiedadPedida.id).subscribe((calificaciones) => {
+              this.propiedad.calificaciones = calificaciones;
+              this.propiedad.calificacionPromedio = calificaciones.reduce((acc, calificacion) => acc + calificacion.calificacion, 0) / calificaciones.length;
             });
           }
         });
