@@ -4,7 +4,7 @@
       <!-- PENDIENTE: METER DESCRIPCION E IMAGEN EN BACKEND -->
       <app-card-propiedad-arrendatario *ngFor="let propiedad of propiedades"
                           [nombre]="propiedad.nombre"
-                          [descripcion]='descripcionGenerica'
+                          [descripcion]='propiedad.propiedad'
                           [precio]="propiedad.precioXnoche"
                           [imagenUrl]="imagenGenerica"
                           [id]="propiedad.id">

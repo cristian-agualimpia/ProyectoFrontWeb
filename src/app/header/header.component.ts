@@ -68,7 +68,19 @@ export class HeaderComponent implements OnInit {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
+
   irAPublicarPropiedad() {
     this.router.navigate(['/publicar-propiedad']);
   }
+
+  redirectToHome() {
+    if (this.rolArrendatario) {
+      this.router.navigate(['/arrendatario']); // Ruta para arrendatarios
+    } else {
+      this.router.navigate(['/arrendador']); // Ruta para arrendadores
+    }
+  }
+
+  
+
 }
