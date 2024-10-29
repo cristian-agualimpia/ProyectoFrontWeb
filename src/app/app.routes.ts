@@ -1,18 +1,16 @@
 // app.routes.ts
 import { Routes } from '@angular/router';
 import { AccesoComponent } from './acceso/acceso.component';
-import { InicioComponentArrendador } from './arrendador/inicio/inicio.component';
-import { InicioComponentArrendatario } from './arrendatario/inicio/inicio.component';
-import { PrincipalLandingComponent } from './landing/principal-landing/principal-landing.component';
-import { RegistroComponent } from './registro/registro.component';
-import { PerfilArrendadorComponent } from './arrendador/perfil-arrendador/perfil-arrendador.component';
-import { HistorialArrendadorComponent } from './arrendador/historial-arrendador/historial-arrendador.component';
 import { ArrendamientosActualesComponent } from './arrendador/arrendamientos-actuales/arrendamientos-actuales.component';
-import { PerfilComponent } from './arrendatario/perfil/perfil.component';
-import { ListaDeseosComponent } from './arrendatario/lista-deseos/lista-deseos.component';
+import { HistorialArrendadorComponent } from './arrendador/historial-arrendador/historial-arrendador.component';
+import { InicioComponentArrendador } from './arrendador/inicio/inicio.component';
 import { ArrendamientosProgramadosComponent } from './arrendatario/arrendamientos-programados/arrendamientos-programados.component';
 import { HistorialArrendatarioComponent } from './arrendatario/historial-arrendatario/historial-arrendatario.component';
-import { Component } from '@angular/core';
+import { InicioComponentArrendatario } from './arrendatario/inicio/inicio.component';
+import { ListaDeseosComponent } from './arrendatario/lista-deseos/lista-deseos.component';
+import { PrincipalLandingComponent } from './landing/principal-landing/principal-landing.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { RegistroComponent } from './registro/registro.component';
 
 
 export const routes: Routes = [
@@ -22,13 +20,12 @@ export const routes: Routes = [
     { path: 'register', component: RegistroComponent },
     { path: 'arrendatario', component: InicioComponentArrendatario },
     { path: 'arrendador', component: InicioComponentArrendador },
+    { path: 'perfil' , component: PerfilComponent},
     //Arrendatario 
-    { path: 'perfil-arrendatario' , component: PerfilComponent},
     { path: 'lista-deseos', component: ListaDeseosComponent},
     { path: 'arrendamientos-programados', component: ArrendamientosProgramadosComponent},
     { path: 'historial-arrendatario', component: HistorialArrendatarioComponent},
     //arrendador
-    { path: 'perfil-arrendador' , component: PerfilArrendadorComponent},
     { path: 'historial-arrendador', component: HistorialArrendadorComponent},
     { path: 'arrendamientos-actuales', component: ArrendamientosActualesComponent},
     { path: '**', redirectTo: '' },// Redirige a la página principal si la ruta no se encuentra
