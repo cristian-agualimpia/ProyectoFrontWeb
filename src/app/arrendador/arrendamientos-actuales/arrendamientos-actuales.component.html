@@ -13,10 +13,11 @@
                 <b>Fecha de llegada:</b> {{fechaLlegada}} <br>
                 <b>Fecha de partida:</b> {{fechaPartida}} <br>
                 <b>Arrendatario: </b> {{nombreArrendador}} <br>  
+                <div>
+                    <button (click)="eliminarSolicitud(solicitudId)" class="bg-Letra1 rounded-full w-full p-1 mt-3 text-white hover:bg-CheeseColorSecondary transition duration-300">Eliminar Solicitud</button>
+                </div>
             </div>
-            <div>
-                <button (click)="eliminarSolicitud(solicitudId)" class="bg-Letra1 rounded-full w-full p-1 mt-3 text-white hover:bg-CheeseColorSecondary transition duration-300">Detalles</button>
-            </div>
+            
         </div>
     </div>
 </div>

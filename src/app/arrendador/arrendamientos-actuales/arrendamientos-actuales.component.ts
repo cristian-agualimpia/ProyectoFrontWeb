@@ -6,11 +6,12 @@ import { Solicitud } from '../../../Conexion back/models/solicitud.model';
 import { ArrendadorService } from '../../../Conexion back/services/arrendador.service';
 import { PropiedadService } from '../../../Conexion back/services/propiedad.service';
 import { SolicitudService } from '../../../Conexion back/services/solicitud.service';
+import { VerticalComponentArrendador } from '../vertical/vertical.component';
 
 @Component({
   selector: 'app-arrendamientos-actuales',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, VerticalComponentArrendador],
   templateUrl: './arrendamientos-actuales.component.html',
   styleUrl: './arrendamientos-actuales.component.css'
 })
