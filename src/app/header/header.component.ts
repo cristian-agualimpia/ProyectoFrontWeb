@@ -44,12 +44,12 @@ export class HeaderComponent implements OnInit {
         }
       });
   }
-   /*
-  aplicarFiltros(filtro: any) {
-    // Aplicamos los filtros localmente a través del propiedadService
-    this.propiedadService.aplicarFiltros(filtro);
-  }
-    */
+  /*
+ aplicarFiltros(filtro: any) {
+   // Aplicamos los filtros localmente a través del propiedadService
+   this.propiedadService.aplicarFiltros(filtro);
+ }
+   */
 
   mostrarBusqueda() {
     this.verBarraBusqueda = !this.verBarraBusqueda;
@@ -68,6 +68,11 @@ export class HeaderComponent implements OnInit {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
+
+  irAPublicarPropiedad() {
+    this.router.navigate(['/publicar-propiedad']);
+  }
+
   redirectToHome() {
     if (this.rolArrendatario) {
       this.router.navigate(['/arrendatario']); // Ruta para arrendatarios
@@ -77,4 +82,5 @@ export class HeaderComponent implements OnInit {
   }
 
   
+
 }

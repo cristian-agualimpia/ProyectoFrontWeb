@@ -3,11 +3,15 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ArrendadorService } from '../../Conexion back/services/arrendador.service';
 import { ArrendatarioService } from '../../Conexion back/services/arrendatario.service';
+import { Router } from '@angular/router';
+import { UsuarioService } from '../../Conexion back/services/usuario.service';
+
+
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './registro.component.html',
   styleUrl: './registro.component.css'
 })
@@ -21,8 +25,10 @@ export class RegistroComponent {
 
   constructor(
     private arrendadorService: ArrendadorService,
-    private arrendatarioService: ArrendatarioService
-  ) {}
+    private arrendatarioService: ArrendatarioService,
+    private usuarioService: UsuarioService,
+    private router: Router
+  ) { }
 
   onSubmit() {
     const usuarioData = {
@@ -38,6 +44,10 @@ export class RegistroComponent {
         () => alert('Arrendador registrado exitosamente'),
         (error) => console.error(error)
       );
+
+      this.usuarioService.accesoUsuarioDemo(1, true);
+      const routePath = '/arrendador';
+      this.router.navigate([routePath]);
     } else {
       this.arrendatarioService.crearArrendatario({
         id: this.id,
@@ -47,13 +57,16 @@ export class RegistroComponent {
         status: 0, // Status inicial predeterminado
         correo: this.correo,
         solicitudes: [],
-        calificaciones:[]
+        calificaciones: []
       }).subscribe(
         () => alert('Arrendatario registrado exitosamente'),
         (error) => console.error(error)
       );
-
+      this.usuarioService.accesoUsuarioDemo(1, false);
+      const routePath = '/arrendatario';
+      this.router.navigate([routePath]);
       console.log("Se ejecutó la condición para crear arrendatario")
     }
+
   }
 }
