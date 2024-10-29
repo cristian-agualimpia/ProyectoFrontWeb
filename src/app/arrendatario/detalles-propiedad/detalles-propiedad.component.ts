@@ -22,7 +22,7 @@ export class DetallesPropiedadComponentArrendatario implements OnInit {
     area: 120,
     capacidad: 6,
     camas: 3,
-    cuartos: true,
+    cuartos: 8,
     parqueadero: true,
     piscina: true,
     disponible: true,
@@ -44,25 +44,21 @@ export class DetallesPropiedadComponentArrendatario implements OnInit {
   };
   
   propiedadPedida?: Propiedad;
-
+  idP: number = 0;
   imagenActual: number = 0;
 
   //MOSTRAR ALQUILER Y PAGO
   mostrarFormularioAlquiler: boolean = false;
 
-  abrirFormularioAlquiler() {
-    this.mostrarFormularioAlquiler = true;
-   // console.log("Se trató de abrir el formulario de alquiler")
-  }
-
   cerrarFormularioAlquiler() {
     this.mostrarFormularioAlquiler = false;
   }
 
-
-  constructor(
-    private propiedadService: PropiedadService,
-  ) {}
+  constructor(private propiedadService: PropiedadService) {
+    this.propiedadService.idPropiedad$.subscribe(id => {
+      this.idP = id !== null ? id : 0;
+    });
+  }
 
   ngOnInit() {
     this.propiedadService.idPropiedad$.subscribe((id) => {
@@ -72,6 +68,10 @@ export class DetallesPropiedadComponentArrendatario implements OnInit {
         });
       }
     });
+  }
+
+  abrirFormularioAlquiler() {
+    this.mostrarFormularioAlquiler = true;
   }
 
   anteriorImagen() {

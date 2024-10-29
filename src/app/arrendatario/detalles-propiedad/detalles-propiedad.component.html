@@ -1,13 +1,4 @@
 <div class="w-full h-full p-6 mt-10 overflow-x-hidden">
-    <!-- Botones Alquilar y Volver -->
-    <div class="flex justify-center mb-4">
-        <button (click)="abrirFormularioAlquiler()" class="bg-blue-600 text-white font-bold px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300 w-1/2 mr-2">
-            Alquilar
-        </button>
-        <button class="bg-gray-600 text-white font-bold px-6 py-2 rounded-full hover:bg-gray-700 transition duration-300 w-1/2 ml-2" (click)="volver()">
-            Volver
-        </button>
-    </div>
     
     <!-- Contenedor de la propiedad -->
     <div class="flex flex-col md:flex-row">
@@ -83,12 +74,16 @@
     <!-- Botones Alquilar y Volver -->
     <div class="flex mt-10 justify-center mb-4">
         <button (click)="abrirFormularioAlquiler()" class="bg-blue-600 text-white font-bold px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300 w-1/2 mr-2">
-            Alquilar
+        Alquilar
         </button>
-        <button class="bg-gray-600 text-white font-bold px-6 py-2 rounded-full hover:bg-gray-700 transition duration-300 w-1/2 ml-2" (click)="volver()">
-            Volver
+        <button class="bg-gray-600 text-white font-bold px-6 py-2 rounded-full hover:bg-gray-700 transition duration-300 w-1/2 ml-2" (click)="cerrarFormularioAlquiler()">
+        Volver
         </button>
     </div>
+
+    <div *ngIf="mostrarFormularioAlquiler && idP !== 0">
+        <app-alquiler [propiedadId]="idP" (cerrar)="cerrarFormularioAlquiler()"></app-alquiler>
+    </div>
+      
 </div>
-<app-alquiler *ngIf="mostrarFormularioAlquiler" (cerrar)="cerrarFormularioAlquiler()"></app-alquiler>
 
