@@ -12,7 +12,6 @@ import { PrincipalLandingComponent } from './landing/principal-landing/principal
 import { PerfilComponent } from './perfil/perfil.component';
 import { RegistroComponent } from './registro/registro.component';
 
-
 export const routes: Routes = [
     //General
     { path: '', component: PrincipalLandingComponent },
@@ -22,11 +21,14 @@ export const routes: Routes = [
     { path: 'arrendador', component: InicioComponentArrendador },
     { path: 'perfil' , component: PerfilComponent},
     //Arrendatario 
+
     { path: 'lista-deseos', component: ListaDeseosComponent},
     { path: 'arrendamientos-programados', component: ArrendamientosProgramadosComponent},
     { path: 'historial-arrendatario', component: HistorialArrendatarioComponent},
     //arrendador
     { path: 'historial-arrendador', component: HistorialArrendadorComponent},
     { path: 'arrendamientos-actuales', component: ArrendamientosActualesComponent},
+
+
     { path: '**', redirectTo: '' },// Redirige a la página principal si la ruta no se encuentra
 ];

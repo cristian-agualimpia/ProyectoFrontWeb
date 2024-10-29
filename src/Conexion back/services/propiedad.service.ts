@@ -27,7 +27,7 @@ export class PropiedadService {
       this.propiedadesFiltradasSubject.next(this.propiedades); // Emitimos inicialmente todas las propiedades
     });
   }
-  
+
 
   // Métodos para cambiar el estado
   mostrarDetalles(id: number) {
@@ -50,8 +50,13 @@ export class PropiedadService {
     return this.http.get<Propiedad[]>(`${this.apiUrl}/propiedades`);
   }
 
+  getPropiedadesArrendador(id: number): Observable<Propiedad[]> {
+    const url = `${this.apiUrl}/arrendador/${id}/propiedades`;
+    return this.http.get<Propiedad[]>(url);
+  }
+
   // Aplicar filtros locales
-  aplicarFiltros(filtros: { capacidad?: number, disponibles?: boolean, parqueadero?: boolean, piscina?: boolean, gimnasios?: boolean, zonaJuegos?:boolean, alimentacion?:boolean, wifi?:boolean, lavanderia?:boolean, mascotas?: boolean }) {
+  aplicarFiltros(filtros: { capacidad?: number, disponibles?: boolean, parqueadero?: boolean, piscina?: boolean, gimnasios?: boolean, zonaJuegos?: boolean, alimentacion?: boolean, wifi?: boolean, lavanderia?: boolean, mascotas?: boolean }) {
     const propiedadesFiltradas = this.propiedades.filter(propiedad => {
       // Filtrar por capacidad
       const coincideCapacidad = filtros.capacidad ? propiedad.capacidad >= filtros.capacidad : true;
@@ -86,5 +91,9 @@ export class PropiedadService {
 
     // Emitir las propiedades filtradas
     this.propiedadesFiltradasSubject.next(propiedadesFiltradas);
+  }
+
+  crearPropiedad(propiedadData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/crearPropiedad`, propiedadData);
   }
 }
