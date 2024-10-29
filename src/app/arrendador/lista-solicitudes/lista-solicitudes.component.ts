@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SolicitudCardComponent } from "../solicitud-card/solicitud-card.component";
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Solicitud } from '../../../Conexion back/models/solicitud.model';
+import { ArrendatarioService } from '../../../Conexion back/services/arrendatario.service';
 import { PropiedadService } from '../../../Conexion back/services/propiedad.service';
 import { SolicitudService } from '../../../Conexion back/services/solicitud.service';
-import { ArrendatarioService } from '../../../Conexion back/services/arrendatario.service';
-import { Solicitud } from '../../../Conexion back/models/solicitud.model';
+import { SolicitudCardComponent } from "../solicitud-card/solicitud-card.component";
+
 
 @Component({
   selector: 'app-lista-solicitudes',
@@ -23,7 +25,8 @@ export class ListaSolicitudesComponent implements OnInit {
   constructor(
     private propiedadService: PropiedadService,
     private solicitudService: SolicitudService,
-    private arrendatarioService: ArrendatarioService
+    private arrendatarioService: ArrendatarioService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -45,5 +48,9 @@ export class ListaSolicitudesComponent implements OnInit {
         }
       });
     });
+  }
+
+  volver(){
+    this.router.navigate(['/arrendatario']);
   }
 }
