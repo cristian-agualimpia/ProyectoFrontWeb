@@ -6,11 +6,12 @@ import { PropiedadService } from '../../../Conexion back/services/propiedad.serv
 import { Solicitud } from '../../../Conexion back/models/solicitud.model';
 import { SolicitudService } from '../../../Conexion back/services/solicitud.service';
 import { ArrendadorService } from '../../../Conexion back/services/arrendador.service';
+import { VerticalComponentArrendatario } from '../../arrendatario/vertical/vertical.component';
 
 @Component({
   selector: 'app-arrendamientos-programados',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, VerticalComponentArrendatario],
   templateUrl: './arrendamientos-programados.component.html',
   styleUrl: './arrendamientos-programados.component.css'
 })

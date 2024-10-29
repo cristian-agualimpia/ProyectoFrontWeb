@@ -7,4 +7,5 @@ export interface Arrendatario {
     correo: string;
     solicitudes: [];
     calificaciones: [];
+    calificacionPromedio: number;
 }

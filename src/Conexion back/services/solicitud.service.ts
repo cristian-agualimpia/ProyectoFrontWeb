@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Solicitud } from '../models/solicitud.model';
 
@@ -38,11 +38,12 @@ export class SolicitudService {
     return this.http.put<Solicitud>(`${this.apiUrl}/actualizarSolicitud/${id}`, solicitud);
   }
 
-  aceptarSolicitud(id: number): Observable<Solicitud> {
-    return this.http.put<Solicitud>(`${this.apiUrl}/aceptarSolicitud/${id}`, {});
-  }
-
   eliminarSolicitud(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/eliminarSolicitud/${id}`);
+  }
+
+  aceptarSolicitud(id: number): Observable<Solicitud> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put<Solicitud>(`${this.apiUrl}/aceptarSolicitud/${id}`, { headers });
   }
 }

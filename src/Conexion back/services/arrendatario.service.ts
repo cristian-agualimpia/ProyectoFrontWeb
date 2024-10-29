@@ -15,6 +15,10 @@ export class ArrendatarioService {
     return this.http.get<any>(`${this.apiUrl}/arrendatario/${id}`);
   }
 
+  getArrendatario = (id: number): Observable<Arrendatario> => {
+    return this.http.get<Arrendatario>(`${this.apiUrl}/arrendatario/${id}`);
+  }
+
   crearArrendatario(arrendatarioData: Arrendatario): Observable<any> {
     return this.http.post(`${this.apiUrl}/crearArrendatario`, arrendatarioData);
   }

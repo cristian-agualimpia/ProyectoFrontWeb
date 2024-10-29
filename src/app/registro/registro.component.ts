@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ArrendadorService } from '../../Conexion back/services/arrendador.service';
 import { ArrendatarioService } from '../../Conexion back/services/arrendatario.service';
-import { Router } from '@angular/router';
 import { UsuarioService } from '../../Conexion back/services/usuario.service';
 
 
@@ -60,7 +59,8 @@ export class RegistroComponent {
         status: 0, // Status inicial predeterminado
         correo: this.correo,
         solicitudes: [],
-        calificaciones: []
+        calificaciones: [],
+        calificacionPromedio: 0
       }).subscribe(
         () => alert('Arrendatario registrado exitosamente'),
         (error) => console.error(error)

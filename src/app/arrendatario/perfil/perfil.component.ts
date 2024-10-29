@@ -22,7 +22,8 @@ export class PerfilComponent {
     status: 1,
     correo: 'correo@example.com',
     solicitudes: [],
-    calificaciones: []
+    calificaciones: [],
+    calificacionPromedio: 5,
   };
   
   nombre: string = 'Nombre de Ejemplo';

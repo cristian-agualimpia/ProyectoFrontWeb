@@ -13,6 +13,7 @@ import { ListaDeseosComponent } from './arrendatario/lista-deseos/lista-deseos.c
 import { ArrendamientosProgramadosComponent } from './arrendatario/arrendamientos-programados/arrendamientos-programados.component';
 import { HistorialArrendatarioComponent } from './arrendatario/historial-arrendatario/historial-arrendatario.component';
 import { PublicarPropiedadComponent } from './arrendador/publicar-propiedad/publicar-propiedad.component';
+import { DetallesPropiedadComponentArrendador } from './arrendador/detalles-propiedad/detalles-propiedad.component';
 import { Component } from '@angular/core';
 
 
@@ -33,5 +34,6 @@ export const routes: Routes = [
     { path: 'historial-arrendador', component: HistorialArrendadorComponent },
     { path: 'arrendamientos-actuales', component: ArrendamientosActualesComponent },
     { path: 'publicar-propiedad', component: PublicarPropiedadComponent },
+    { path: 'arrendador/detalles-propiedad/:id', component: DetallesPropiedadComponentArrendador },
     { path: '**', redirectTo: '' },// Redirige a la página principal si la ruta no se encuentra
 ];

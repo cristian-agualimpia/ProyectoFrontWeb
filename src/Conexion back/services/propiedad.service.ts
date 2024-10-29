@@ -13,7 +13,6 @@ export class PropiedadService {
 
   private verDetalle = new BehaviorSubject<boolean>(false);
   private idPropiedad = new BehaviorSubject<number | null>(null);
-
   // Observables para que los componentes se suscriban
   verDetalle$ = this.verDetalle.asObservable();
   idPropiedad$ = this.idPropiedad.asObservable();
