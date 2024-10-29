@@ -18,4 +18,11 @@ export class ArrendatarioService {
   crearArrendatario(arrendatarioData: Arrendatario): Observable<any> {
     return this.http.post(`${this.apiUrl}/crearArrendatario`, arrendatarioData);
   }
+
+  modificarUsuarioArrendatario(arrendatario: Partial<Arrendatario>, id: number): Observable<any> {
+    // Excluir id, solicitudes, y calificaciones del objeto antes de enviarlo
+    const { id: _, solicitudes, calificaciones, ...dataToUpdate } = arrendatario;
+    
+    return this.http.put(`${this.apiUrl}/actualizarArrendatario/${id}`, dataToUpdate);
+  }
 }

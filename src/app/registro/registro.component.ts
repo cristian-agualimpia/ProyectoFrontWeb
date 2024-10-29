@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ArrendadorService } from '../../Conexion back/services/arrendador.service';
 import { ArrendatarioService } from '../../Conexion back/services/arrendatario.service';
 
@@ -21,7 +22,8 @@ export class RegistroComponent {
 
   constructor(
     private arrendadorService: ArrendadorService,
-    private arrendatarioService: ArrendatarioService
+    private arrendatarioService: ArrendatarioService,
+    private router: Router
   ) {}
 
   onSubmit() {
@@ -52,7 +54,7 @@ export class RegistroComponent {
         () => alert('Arrendatario registrado exitosamente'),
         (error) => console.error(error)
       );
-
+      this.router.navigate(['/']);
       console.log("Se ejecutó la condición para crear arrendatario")
     }
   }
