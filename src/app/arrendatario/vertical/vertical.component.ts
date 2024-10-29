@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { UsuarioService } from '../../../Conexion back/services/usuario.service';
+
 @Component({
   selector: 'app-vertical-arrendatario',
   standalone: true,

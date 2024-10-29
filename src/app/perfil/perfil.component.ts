@@ -66,8 +66,31 @@ export class PerfilComponent implements OnInit {
   }
 
   deleteAccount(): void {
+    if(this.rol = "arrendatario") {
+      this.arrendatarioService.eliminarArrendatario(this.id)
+        .subscribe({
+          next: (response) => {
+            console.log("Arrendatario eliminado exitosamente");
+          },
+          error: (err) => {
+            console.log("Arrendatario eliminado exitosamente");
+          }
+        });
+    }else if (this.rol = "arrendador") {
+      this.arrendadorService.eliminarArrendador(this.id)
+        .subscribe({
+          next: (response) => {
+            console.log("Arrendador eliminado exitosamente");
+          },
+          error: (err) => {
+            console.log("Arrendatario eliminado exitosamente");
+          }
+        });
+
+    }
     alert("Cuenta eliminada");
     this.closeModal();
+    this.router.navigate(['/']);
   }
 
   saveChanges(): void {
@@ -106,30 +129,31 @@ export class PerfilComponent implements OnInit {
         }
       });
       this.router.navigate(['/arrendatario']);
-    } else {
+    } else if (this.rol = "arrendador") {
       // Llamada al servicio para actualizar el arrendador
-    const arrendador: Arrendador = {
-      id: this.id,
-      usuario: this.usuario,
-      contrasena: this.contrasena,
-      nombre: this.nombre,
-      status: 0, // Asegúrate de usar el valor correcto
-      correo: this.correo,
-      propiedades: [],
-      calificaciones: []
-  };
-    this.arrendadorService.modificarUsuarioArrendador(arrendador, this.id)
-      .subscribe({
-        next: (response) => {
-          alert("Cambios guardados exitosamente");
-        },
-        error: (err) => {
-          console.error('Error al actualizar arrendador:', err);
-          alert("Hubo un error al guardar los cambios");
-        }
-      });
-      this.router.navigate(['/arrendador']);
-    }
+      const arrendador: Arrendador = {
+        id: this.id,
+        usuario: this.usuario,
+        contrasena: this.contrasena,
+        nombre: this.nombre,
+        status: 0, // Asegúrate de usar el valor correcto
+        correo: this.correo,
+        propiedades: [],
+        calificaciones: [],
+        calificacionPromedio: 0
+    };
+      this.arrendadorService.modificarUsuarioArrendador(arrendador, this.id)
+        .subscribe({
+          next: (response) => {
+            alert("Cambios guardados exitosamente");
+          },
+          error: (err) => {
+            console.error('Error al actualizar arrendador:', err);
+            alert("Hubo un error al guardar los cambios");
+          }
+        });
+        this.router.navigate(['/arrendador']);
+      }
   }
 
   changeImage(): void {
