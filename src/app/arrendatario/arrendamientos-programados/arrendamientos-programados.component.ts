@@ -17,8 +17,8 @@ import { VerticalComponentArrendatario } from '../../arrendatario/vertical/verti
 })
 export class ArrendamientosProgramadosComponent {
   propiedades: Propiedad[] = [];
-  llegada: string = "29/10/2024";
-  partida: string = "31/10/2024";
+  fechaLlegada: Date = new(Date);
+  fechaPartida: Date = new(Date);
   nombreArrendador: string = "Pepito Perez";
   nombrePropiedad: string = "Apto fantastico";
   solicitudes: Solicitud[] = [];
@@ -30,29 +30,22 @@ export class ArrendamientosProgramadosComponent {
   ) { }
 
   ngOnInit(): void {
-    // Suscribirse al BehaviorSubject de propiedades filtradas
     this.solicitudService.getSolicitudesByArrendatarioId(1).subscribe((data: Solicitud[]) => {
       this.solicitudes = data;
-    });
-    for (let i = 0; i < this.solicitudes.length; i++) {
-      if (this.solicitudes[i].aceptacion == false) {
-        this.propiedadService.getPropiedadEspecifica(this.solicitudes[i].propiedadId).subscribe((data: Propiedad) => {
-          this.propiedades.push(data);
-          this.propiedad = data;
-        });
-        if (this.propiedad) {
-          this.arrendadorService.obtenerArrendador(this.propiedad.arrendadorId).subscribe((data: any) => {
-            this.nombreArrendador = data.nombre;
+      this.solicitudes.forEach(solicitud => {
+        if (!solicitud.aceptacion) {
+          this.fechaLlegada = solicitud.fechaLlegada;
+          this.fechaPartida = solicitud.fechaPartida;
+          this.propiedadService.getPropiedadEspecifica(solicitud.propiedadId).subscribe((propiedad: Propiedad) => {
+            this.propiedades.push(propiedad);
+            this.propiedad = propiedad;
+            this.arrendadorService.obtenerArrendador(propiedad.arrendadorId).subscribe((arrendador: any) => {
+              this.nombreArrendador = arrendador.nombre;
+            });
           });
         }
-
-      }
-
-    }
+      });
+    });
   }
 
-  mostrarDetalles(id: number) {
-    this.propiedadService.mostrarDetalles(id);
-    console.log("Se pulsó el botón detalles en el card" + id)
-  }
 }
