@@ -16,8 +16,8 @@ import { Arrendador } from '../../../Conexion back/models/arrendador.model';
 
 export class DetallesPropiedadComponentArrendatario implements OnInit {
   isExpanded: boolean = false; // Inicialmente contraído
-  calificacionPromedio: number = 5;
   propiedad: any = {
+    calificacionPromedio: 0,
     nombre: 'Casa de Playa',
     ubicacion: 'Cancún, México',
     precioXnoche: 150,
