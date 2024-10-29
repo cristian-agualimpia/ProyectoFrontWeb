@@ -23,6 +23,7 @@ export class ArrendamientosActualesComponent {
   nombrePropiedad: string = "Apto fantastico";
   solicitudes: Solicitud[] = [];
   propiedad?: Propiedad
+  solicitudId: number = 0;
 
   constructor(private propiedadService: PropiedadService,
     private solicitudService: SolicitudService,
@@ -39,6 +40,9 @@ export class ArrendamientosActualesComponent {
             if (!solicitud.aceptacion) {
               this.fechaLlegada = solicitud.fechaLlegada;
               this.fechaPartida = solicitud.fechaPartida;
+              if (solicitud.id !== undefined) {
+                this.solicitudId = solicitud.id;
+              }
               this.propiedadService.getPropiedadEspecifica(solicitud.propiedadId).subscribe((propiedad: Propiedad) => {
                 this.propiedades.push(propiedad);
                 this.propiedad = propiedad;
@@ -54,4 +58,16 @@ export class ArrendamientosActualesComponent {
     });
     
   }
+
+  eliminarSolicitud(id: number) {
+    this.solicitudService.eliminarSolicitud(id).subscribe(
+      () => {
+        alert('Propiedad eliminada exitosamente');
+      },
+      error => {
+        alert('Solicitud eliminada exitosamente');
+      }
+    );
+  }
+
 }
