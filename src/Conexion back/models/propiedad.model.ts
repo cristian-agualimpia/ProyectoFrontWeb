@@ -14,8 +14,7 @@ export interface Propiedad {
     arrendadorId:number;
     calificaciones:[];
     solicitudes:[];  
-
-    calificacionPromedio: number,
+    calificacionPromedio: number;
     lavanderia: boolean,
     wifi: boolean,
     mascotas: boolean,
