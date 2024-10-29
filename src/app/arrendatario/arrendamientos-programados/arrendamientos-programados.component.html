@@ -10,12 +10,9 @@
         <div class="space-y-4">
             <div *ngFor="let propiedad of propiedades">
                 <b>Nombre de la propiedad:</b> {{propiedad.nombre}} <br>
-                <b>Fecha de llegada:</b> {{llegada}} <br>
-                <b>Fecha de partida:</b> {{partida}} <br>
-                <b>Arrendatario: </b> {{nombreArrendador}} <br>                
-                <div>
-                    <button (click)="mostrarDetalles(propiedad.id)" class="bg-Letra1 rounded-full w-full p-1 mt-3 text-white hover:bg-CheeseColorSecondary transition duration-300">Detalles</button>
-                </div>
+                <b>Fecha de llegada:</b> {{fechaLlegada}} <br>
+                <b>Fecha de partida:</b> {{fechaPartida}} <br>
+                <b>Arrendatario: </b> {{nombreArrendador}} <br>  
             </div>
 
         </div>
