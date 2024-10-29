@@ -67,4 +67,14 @@ export class HeaderComponent implements OnInit {
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
+
+  redirectToHome() {
+    if (this.rolArrendatario) {
+      this.router.navigate(['/arrendatario']); // Ruta para arrendatarios
+    } else {
+      this.router.navigate(['/arrendador']); // Ruta para arrendadores
+    }
+  }
+
+  
 }
