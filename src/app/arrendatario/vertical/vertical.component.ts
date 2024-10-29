@@ -17,7 +17,6 @@ export class VerticalComponentArrendatario {
   ) {
     this.nombreUsuario = usuarioService.getUsuarioNombre()
   }
-
   cerrarSesion(){
     this.usuarioService.logout();
   }
