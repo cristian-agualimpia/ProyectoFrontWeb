@@ -1,6 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { UsuarioService } from '../../../Conexion back/services/usuario.service';
 @Component({
   selector: 'app-vertical-arrendatario',
   standalone: true,
@@ -11,4 +12,13 @@ import { CommonModule } from '@angular/common';
 export class VerticalComponentArrendatario {
   nombreUsuario?:string;
 
+  constructor(
+    private usuarioService: UsuarioService
+  ) {
+    this.nombreUsuario = usuarioService.getUsuarioNombre()
+  }
+
+  cerrarSesion(){
+    this.usuarioService.logout();
+  }
 }

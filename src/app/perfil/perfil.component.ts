@@ -106,7 +106,28 @@ export class PerfilComponent implements OnInit {
       });
       this.router.navigate(['/arrendatario']);
     } else {
-
+      // Llamada al servicio para actualizar el arrendador
+    const arrendador: Arrendador = {
+      id: this.id,
+      usuario: this.usuario,
+      contrasena: this.contrasena,
+      nombre: this.nombre,
+      status: 0, // Asegúrate de usar el valor correcto
+      correo: this.correo,
+      propiedades: [],
+      calificaciones: []
+  };
+    this.arrendadorService.modificarUsuarioArrendador(arrendador, this.id)
+      .subscribe({
+        next: (response) => {
+          alert("Cambios guardados exitosamente");
+        },
+        error: (err) => {
+          console.error('Error al actualizar arrendador:', err);
+          alert("Hubo un error al guardar los cambios");
+        }
+      });
+      this.router.navigate(['/arrendador']);
     }
   }
 

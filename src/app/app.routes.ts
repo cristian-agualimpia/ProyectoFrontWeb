@@ -4,6 +4,7 @@ import { AccesoComponent } from './acceso/acceso.component';
 import { ArrendamientosActualesComponent } from './arrendador/arrendamientos-actuales/arrendamientos-actuales.component';
 import { HistorialArrendadorComponent } from './arrendador/historial-arrendador/historial-arrendador.component';
 import { InicioComponentArrendador } from './arrendador/inicio/inicio.component';
+import { PublicarPropiedadComponent } from './arrendador/publicar-propiedad/publicar-propiedad.component';
 import { ArrendamientosProgramadosComponent } from './arrendatario/arrendamientos-programados/arrendamientos-programados.component';
 import { HistorialArrendatarioComponent } from './arrendatario/historial-arrendatario/historial-arrendatario.component';
 import { InicioComponentArrendatario } from './arrendatario/inicio/inicio.component';
@@ -28,6 +29,7 @@ export const routes: Routes = [
     //arrendador
     { path: 'historial-arrendador', component: HistorialArrendadorComponent},
     { path: 'arrendamientos-actuales', component: ArrendamientosActualesComponent},
+    { path: 'publicar-propiedad', component: PublicarPropiedadComponent},
 
 
     { path: '**', redirectTo: '' },// Redirige a la página principal si la ruta no se encuentra

@@ -7,7 +7,7 @@ import { PropiedadService } from '../../../Conexion back/services/propiedad.serv
   selector: 'app-barra-busqueda-arrendatario',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './barra-busqueda.component.html',
+  templateUrl: './barra-busqueda-arrendatario.component.html',
   styleUrls: ['./barra-busqueda.component.css']
 })
 export class BarraBusquedaComponentArrendatario {
@@ -22,6 +22,8 @@ export class BarraBusquedaComponentArrendatario {
   zonaJuegos: boolean = false;
   lavanderia: boolean = false;
   alimentacion: boolean = false;
+  ubicacion:string = "";
+  nombre:string = "";
 
   // Emitir evento con todos los filtros
  // @Output() filtroAplicado = new EventEmitter<{ capacidad?: number, disponibles?: boolean, parqueadero?: boolean, piscina?: boolean }>();
@@ -42,7 +44,9 @@ export class BarraBusquedaComponentArrendatario {
       zonaJuegos: this.zonaJuegos,
       lavanderia: this.lavanderia,
       alimentacion: this.alimentacion,
-      mascotas: (this.mascotas > 0)
+      mascotas: (this.mascotas > 0),
+      ubicacion: this.ubicacion,
+      nombre: this.nombre
     });
     this.propiedadService.ocultarDetalles()
   }

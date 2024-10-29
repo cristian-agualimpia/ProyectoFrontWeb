@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ArrendadorService } from '../../Conexion back/services/arrendador.service';
 import { ArrendatarioService } from '../../Conexion back/services/arrendatario.service';
-import { Router } from '@angular/router';
 import { UsuarioService } from '../../Conexion back/services/usuario.service';
 
 
