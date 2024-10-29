@@ -50,6 +50,11 @@ export class PropiedadService {
     return this.http.get<Propiedad[]>(`${this.apiUrl}/propiedades`);
   }
 
+  getPropiedadesArrendador(id: number): Observable<Propiedad[]> {
+    const url = `${this.apiUrl}/arrendador/${id}/propiedades`;
+    return this.http.get<Propiedad[]>(url);
+  }
+
   // Aplicar filtros locales
   aplicarFiltros(filtros: { capacidad?: number, disponibles?: boolean, parqueadero?: boolean, piscina?: boolean, gimnasios?: boolean, zonaJuegos?:boolean, alimentacion?:boolean, wifi?:boolean, lavanderia?:boolean, mascotas?: boolean }) {
     const propiedadesFiltradas = this.propiedades.filter(propiedad => {
