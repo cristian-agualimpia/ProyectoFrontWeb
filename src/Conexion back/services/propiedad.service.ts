@@ -55,7 +55,7 @@ export class PropiedadService {
   }
 
   // Aplicar filtros locales
-  aplicarFiltros(filtros: { capacidad?: number, disponibles?: boolean, parqueadero?: boolean, piscina?: boolean, gimnasios?: boolean, zonaJuegos?: boolean, alimentacion?: boolean, wifi?: boolean, lavanderia?: boolean, mascotas?: boolean }) {
+  aplicarFiltros(filtros: { capacidad?: number, disponibles?: boolean, parqueadero?: boolean, piscina?: boolean, gimnasios?: boolean, zonaJuegos?: boolean, alimentacion?: boolean, wifi?: boolean, lavanderia?: boolean, mascotas?: boolean, ubicacion?:string, nombre?:string }) {
     const propiedadesFiltradas = this.propiedades.filter(propiedad => {
       // Filtrar por capacidad
       const coincideCapacidad = filtros.capacidad ? propiedad.capacidad >= filtros.capacidad : true;
@@ -69,23 +69,29 @@ export class PropiedadService {
       // Filtrar por piscina
       const coincidePiscina = filtros.piscina ? propiedad.piscina === filtros.piscina : true;
 
-      // Filtrar por piscina
+      // Filtrar por gym
       const coincideGimnasios = filtros.gimnasios ? propiedad.gimnasios === filtros.gimnasios : true;
 
-      // Filtrar por piscina
+      // Filtrar por wifi
       const coincideWifi = filtros.wifi ? propiedad.wifi === filtros.wifi : true;
 
-      // Filtrar por piscina
+      // Filtrar por comida
       const coincideAlimentacion = filtros.alimentacion ? propiedad.alimentacion === filtros.alimentacion : true;
 
-      // Filtrar por piscina
+      // Filtrar por juegos
       const coincideZonaJuegos = filtros.zonaJuegos ? propiedad.zonaJuegos === filtros.zonaJuegos : true;
 
-      // Filtrar por piscina
+      // Filtrar por mascotas
       const coincideMascotas = filtros.mascotas ? propiedad.mascotas === filtros.mascotas : true;
 
+      // Filtrar por mascotas
+      const coincideUbicacion = filtros.ubicacion ? propiedad.ubicacion === filtros.ubicacion : true;
+
+      // Filtrar por mascotas
+      const coincideNombre = filtros.nombre ? propiedad.nombre === filtros.nombre : true;
+
       // Retornar la propiedad si cumple con todos los filtros
-      return coincideCapacidad && coincideDisponibles && coincideParqueadero && coincidePiscina && coincideAlimentacion && coincideGimnasios && coincideMascotas && coincideWifi && coincideZonaJuegos;
+      return coincideCapacidad && coincideDisponibles && coincideParqueadero && coincidePiscina && coincideAlimentacion && coincideGimnasios && coincideMascotas && coincideWifi && coincideZonaJuegos && coincideUbicacion && coincideNombre;
     });
 
     // Emitir las propiedades filtradas

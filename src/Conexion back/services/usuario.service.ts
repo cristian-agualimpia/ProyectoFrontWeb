@@ -31,6 +31,7 @@ export class UsuarioService {
           tipoUsuario: 'arrendatario'
         };
         sessionStorage.setItem('usuario', JSON.stringify(usuarioData));
+
       });
     }
   }
@@ -44,6 +45,18 @@ export class UsuarioService {
   getUsuarioData() {
     const usuario = sessionStorage.getItem('usuario');
     return usuario ? JSON.parse(usuario) : null;
+  }
+
+  getUsuarioID() {
+    return this.getUsuarioData().id
+  }
+
+  getUsuarioNombre() {
+    return this.getUsuarioData().nombre
+  }
+
+  getUsuarioTipo() {
+    return this.getUsuarioData().tipoUsuario
   }
 
   /* Ejemplo de método accesoUsuario con autenticación basada en tokens (comentado)
