@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Propiedad } from '../../../Conexion back/models/propiedad.model';
+import { ArrendadorService } from '../../../Conexion back/services/arrendador.service';
 import { PropiedadService } from '../../../Conexion back/services/propiedad.service';
 import { AlquilerComponent } from '../alquiler/alquiler.component';
+import { Arrendador } from '../../../Conexion back/models/arrendador.model';
 
 @Component({
   selector: 'app-detalles-propiedad-arrendatario',
@@ -46,6 +48,7 @@ export class DetallesPropiedadComponentArrendatario implements OnInit {
   propiedadPedida?: Propiedad;
   idP: number = 0;
   imagenActual: number = 0;
+  arrendadorNombre: string = '';
 
   //MOSTRAR ALQUILER Y PAGO
   mostrarFormularioAlquiler: boolean = false;
@@ -54,9 +57,12 @@ export class DetallesPropiedadComponentArrendatario implements OnInit {
     this.mostrarFormularioAlquiler = false;
   }
 
-  constructor(private propiedadService: PropiedadService) {
+  constructor(
+    private propiedadService: PropiedadService,
+    private arrendadorService: ArrendadorService
+  ) {
     this.propiedadService.idPropiedad$.subscribe(id => {
-      this.idP = id !== null ? id : 0;
+      this.idP = id !== null ? id : 0; 
     });
   }
 
@@ -65,6 +71,12 @@ export class DetallesPropiedadComponentArrendatario implements OnInit {
       if (id) {
         this.propiedadService.getPropiedadEspecifica(id).subscribe((data) => {
           this.propiedadPedida = data;
+          if (this.propiedadPedida && this.propiedadPedida.arrendadorId) {
+            this.arrendadorService.obtenerArrendador(this.propiedadPedida.arrendadorId).subscribe((arrendador: Arrendador) => {
+              this.arrendadorNombre = arrendador.nombre;
+              this.propiedad.arrendadorNombre = this.arrendadorNombre; 
+            });
+          }
         });
       }
     });
