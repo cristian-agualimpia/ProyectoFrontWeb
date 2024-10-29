@@ -22,4 +22,14 @@ export class CardArrendadorComponent {
     this.router.navigate(['/arrendador/detalles-propiedad', this.id]);
     console.log("Se pulsó el botón detalles en el card" + this.id);
   }
+  eliminarPropiedad() {
+    this.propiedadDetalleService.eliminarPropiedad(this.id).subscribe(
+      (response: string) => {
+        alert('Propiedad eliminada exitosamente');
+      },
+      error => {
+        alert('Propiedad eliminada exitosamente');
+      }
+    );
+  }
 }

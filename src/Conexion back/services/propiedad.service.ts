@@ -101,4 +101,8 @@ export class PropiedadService {
   crearPropiedad(propiedadData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/crearPropiedad`, propiedadData);
   }
+
+  eliminarPropiedad(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/eliminarPropiedad/${id}`);
+  }
 }
