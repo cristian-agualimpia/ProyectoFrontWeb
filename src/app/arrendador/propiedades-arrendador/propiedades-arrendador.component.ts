@@ -1,27 +1,24 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { Propiedad } from '../../../Conexion back/models/propiedad.model';
 import { PropiedadService } from '../../../Conexion back/services/propiedad.service';
-import { VerticalComponentArrendador } from "../vertical/vertical.component";
-import { PropiedadesArrendadorComponent } from "../propiedades-arrendador/propiedades-arrendador.component";
+import { CardArrendadorComponent } from '../card-arrendador/card-arrendador.component';
+
 
 @Component({
-  selector: 'app-inicio-arrendador',
+  selector: 'app-propiedades-arrendador',
   standalone: true,
-  imports: [CommonModule, VerticalComponentArrendador, PropiedadesArrendadorComponent],
-  templateUrl: './inicio.component.html',
-  styleUrls: ['./inicio.component.css']
+  imports: [CommonModule, CardArrendadorComponent],
+  templateUrl: './propiedades-arrendador.component.html',
+  styleUrl: './propiedades-arrendador.component.css'
 })
-export class InicioComponentArrendador implements OnInit {
-  verCuenta: boolean = false;
+export class PropiedadesArrendadorComponent implements OnInit {
+  descripcionGenerica: string = "Esta es una descripción de la propiedad.";
+  imagenGenerica: string = "https://picsum.photos/200/300";
   propiedades: Propiedad[] = [];
-  propiedadesFiltradas: Propiedad[] = [];
-  verDetalle: boolean = false;
   idArrendador: number = 0;
 
-  constructor(
-    private propiedadService: PropiedadService
-  ) {}
+  constructor(private propiedadService: PropiedadService) {}
 
   ngOnInit(): void {
     this.getUsuarioDatos();
@@ -45,7 +42,4 @@ export class InicioComponentArrendador implements OnInit {
     }
   }
 
-  mostrarCuenta() {
-    this.verCuenta = !this.verCuenta;
-  }
 }
