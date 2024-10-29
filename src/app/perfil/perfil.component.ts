@@ -92,7 +92,8 @@ export class PerfilComponent implements OnInit {
       status: 0, // Asegúrate de usar el valor correcto
       correo: this.correo,
       solicitudes: [],
-      calificaciones: []
+      calificaciones: [],
+      calificacionPromedio: 0
   };
     this.arrendatarioService.modificarUsuarioArrendatario(arrendatario, this.id)
       .subscribe({

@@ -1,4 +1,3 @@
-// app.routes.ts
 import { Routes } from '@angular/router';
 import { AccesoComponent } from './acceso/acceso.component';
 import { ArrendamientosActualesComponent } from './arrendador/arrendamientos-actuales/arrendamientos-actuales.component';
@@ -12,6 +11,7 @@ import { ListaDeseosComponent } from './arrendatario/lista-deseos/lista-deseos.c
 import { PrincipalLandingComponent } from './landing/principal-landing/principal-landing.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { RegistroComponent } from './registro/registro.component';
+import { DetallesPropiedadComponentArrendador } from './arrendador/detalles-propiedad/detalles-propiedad.component';
 
 export const routes: Routes = [
     //General
@@ -30,7 +30,6 @@ export const routes: Routes = [
     { path: 'historial-arrendador', component: HistorialArrendadorComponent},
     { path: 'arrendamientos-actuales', component: ArrendamientosActualesComponent},
     { path: 'publicar-propiedad', component: PublicarPropiedadComponent},
-
-
+    { path: 'arrendador/detalles-propiedad/:id', component: DetallesPropiedadComponentArrendador },
     { path: '**', redirectTo: '' },// Redirige a la página principal si la ruta no se encuentra
 ];
