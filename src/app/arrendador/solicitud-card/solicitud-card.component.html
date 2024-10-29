@@ -7,9 +7,9 @@
       
       <!-- Descripción corta de la propiedad -->
       <p class="text-Letra2 mt-2 text-sm leading-relaxed">{{ fechaLlegada}}  -  {{ fechaPartida}}</p>
-      <p class="text-Letra2 mt-2 text-sm leading-relaxed">{{ nombreArrendatario}}</p>
-      <p class="text-Letra2 mt-2 text-sm leading-relaxed">{{ calificacionPromedio}}</p>
-      <p class="text-Letra2 mt-2 text-sm leading-relaxed">{{ cantidadPersonas}}</p>
+      <p class="text-Letra2 mt-2 text-sm leading-relaxed">Arrendador: {{ nombreArrendatario}}</p>
+      <p class="text-Letra2 mt-2 text-sm leading-relaxed">{{ calificacionPromedio}} estrellas</p>
+      <p class="text-Letra2 mt-2 text-sm leading-relaxed">Personas: {{ cantidadPersonas}}</p>
 
       <div>
         <button (click)="aceptarSolicitud()" class="bg-Letra1 rounded-full w-full p-1 mt-3 text-white hover:bg-CheeseColorSecondary transition duration-300">Aceptar</button>
