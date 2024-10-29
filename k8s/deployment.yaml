@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cheeserun-frontend
-  namespace: frontRun
+  namespace: frontrun
 spec:
   selector:
     matchLabels:
@@ -17,7 +17,7 @@ spec:
          - name: github-secret
       containers:
          - name: cheeserun-frontend
-           image: localhost:5000/cheeserun-front
+           image: localhost:5000/cheeserunfront
            ports:
               - containerPort: 8080
            
@@ -26,7 +26,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: cheeserun-frontend-service
-  namespace: frontRun
+  namespace: frontrun
 spec:
   selector:
     app: cheeserun-frontend
