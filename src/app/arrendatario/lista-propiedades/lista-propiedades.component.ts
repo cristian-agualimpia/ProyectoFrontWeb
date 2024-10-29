@@ -12,7 +12,7 @@ import { CardPropiedadComponentArrendatario } from '../card-propiedad/card-propi
   styleUrls: ['./lista-propiedades.component.css']
 })
 export class ListaPropiedadesComponentArrendatario implements OnInit {
-  descripcionGenerica: string = "Esta es una descripción de la propiedad.";
+ // descripcionGenerica: string = "Esta es una descripción de la propiedad.";
   imagenGenerica: string = "https://picsum.photos/200/300";
   propiedades: Propiedad[] = [];
 
