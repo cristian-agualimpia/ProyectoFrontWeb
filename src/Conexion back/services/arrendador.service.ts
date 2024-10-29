@@ -24,5 +24,9 @@ export class ArrendadorService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.put(url, arrendador, { headers });
   }
+
+  eliminarArrendador(id: number): Observable<any> { 
+    return this.http.delete(`${this.apiUrl}/eliminarArrendador/${id}`);
+  }
 }
 
