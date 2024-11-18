@@ -29,7 +29,12 @@ export class PerfilComponent implements OnInit {
   errorContrasena: boolean = false;
 
   arrendatario?: Arrendatario;
+  solicitudes:[] = [];
+  calificaciones:[] = [];
+
   arrendador?: Arrendador;
+  propiedades:[]=[];
+  calificacionPromedio: number= 0;
 
   constructor(
     private router: Router,
@@ -47,12 +52,22 @@ export class PerfilComponent implements OnInit {
       this.arrendadorService.obtenerArrendador(this.id).subscribe(arrendador => {
         this.usuario = arrendador.usuario;
         this.contrasena = arrendador.contrasena;
+        this.nuevaContrasena = this.contrasena;
         this.correo= arrendador.correo ;
+        this.nombre = arrendador.nombre;
+        this.calificacionPromedio = arrendador.calificacionPromedio;
+        
+      
+
       }); } else {
         this.arrendatarioService.obtenerArrendatario(this.id).subscribe(arrendatario => {
         this.usuario = arrendatario.usuario;
         this.contrasena = arrendatario.contrasena;
+        this.nuevaContrasena = this.contrasena;
         this.correo= arrendatario.correo ;
+        this.nombre= arrendatario.nombre;
+        this.calificacionPromedio = arrendatario.calificacionPromedio;
+
         }); }
 
     }
@@ -94,16 +109,17 @@ export class PerfilComponent implements OnInit {
   }
 
   saveChanges(): void {
-    if (this.nuevaContrasena && this.nuevaContrasena !== this.contrasena) {
+    if (this.nuevaContrasena !== this.contrasena) {
       this.errorContrasena = true;
       return;
     }
     this.errorContrasena = false;
 
-    // Si hay una nueva contraseña, la asignamos al objeto arrendatario
+    /*Si hay una nueva contraseña, la asignamos al objeto arrendatario
     if (this.nuevaContrasena) {
       this.contrasena = this.nuevaContrasena;
     }
+    */
 
     if (this.rol = "arrendatario") {
     // Llamada al servicio para actualizar el arrendatario
@@ -117,7 +133,8 @@ export class PerfilComponent implements OnInit {
       solicitudes: [],
       calificaciones: [],
       calificacionPromedio: 0
-  };
+    };
+
     this.arrendatarioService.modificarUsuarioArrendatario(arrendatario, this.id)
       .subscribe({
         next: (response) => {
@@ -154,6 +171,9 @@ export class PerfilComponent implements OnInit {
         });
         this.router.navigate(['/arrendador']);
       }
+      
+      this.usuarioService.actualizarNombreUsuario()
+
   }
 
   changeImage(): void {

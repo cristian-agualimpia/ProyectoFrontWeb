@@ -7,7 +7,7 @@ import { Arrendador } from '../models/arrendador.model';
   providedIn: 'root'
 })
 export class ArrendadorService {
-  private apiUrl = 'http://localhost:8080/api/arrendador';
+  private apiUrl = 'http://localhost:8081/api/arrendador';
 
   constructor(private http: HttpClient) {}
   

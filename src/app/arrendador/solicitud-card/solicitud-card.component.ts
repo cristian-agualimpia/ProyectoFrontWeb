@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { SolicitudService } from '../../../Conexion back/services/solicitud.service';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-solicitud-card',
@@ -19,7 +21,10 @@ export class SolicitudCardComponent {
   @Input() cantidadPersonas: number = 0;
   @Input() id: number =0;
 
-  constructor(private solicitudDetalleService: SolicitudService) {}
+  constructor(
+    private solicitudDetalleService: SolicitudService,
+    private router: Router
+  ) {}
 
   aceptarSolicitud() {
     this.solicitudDetalleService.aceptarSolicitud(this.id).pipe(
@@ -34,4 +39,9 @@ export class SolicitudCardComponent {
       }
   });
 }
+/*
+  volver(){
+    this.router.navigate(['/arrendador']);
+  } 
+    */
 }

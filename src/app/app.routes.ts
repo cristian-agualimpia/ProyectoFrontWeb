@@ -12,6 +12,7 @@ import { PrincipalLandingComponent } from './landing/principal-landing/principal
 import { PerfilComponent } from './perfil/perfil.component';
 import { RegistroComponent } from './registro/registro.component';
 import { DetallesPropiedadComponentArrendador } from './arrendador/detalles-propiedad/detalles-propiedad.component';
+import { EdicionPropiedadComponent } from './arrendador/edicion-propiedad/edicion-propiedad.component';
 
 export const routes: Routes = [
     //General
@@ -31,5 +32,6 @@ export const routes: Routes = [
     { path: 'arrendamientos-actuales', component: ArrendamientosActualesComponent},
     { path: 'publicar-propiedad', component: PublicarPropiedadComponent},
     { path: 'arrendador/detalles-propiedad/:id', component: DetallesPropiedadComponentArrendador },
+    { path: 'arrendador/edicionPropiedad/:id', component: EdicionPropiedadComponent },
     { path: '**', redirectTo: '' },// Redirige a la página principal si la ruta no se encuentra
 ];
