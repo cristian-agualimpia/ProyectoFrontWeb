@@ -15,14 +15,16 @@
             </label>
         </div>
     </div>
-    
+
     <div class="mb-4">
-        <input type="text" name="usuario" placeholder="ID - Nombre de usuario" class="mb-4 p-2 border rounded w-full" ngModel required>
+        <input type="text" name="usuario" placeholder="ID - Nombre de usuario" class="mb-4 p-2 border rounded w-full"
+            [(ngModel)]="username" required>
     </div>
-    
+
     <div class="mb-4">
-        <input type="password" name="password" placeholder="Contraseña" class="mb-4 p-2 border rounded w-full" ngModel required>
+        <input type="password" name="password" placeholder="Contraseña" class="mb-4 p-2 border rounded w-full"
+            [(ngModel)]="password" required>
     </div>
-    
+
     <button type="submit" class="bg-green-600 text-white p-2 rounded w-full">Iniciar sesión</button>
 </form>

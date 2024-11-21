@@ -22,13 +22,20 @@ export class PropiedadService {
   propiedadesFiltradas$ = this.propiedadesFiltradasSubject.asObservable(); // Observable para suscribirse desde el componente
 
   constructor(private http: HttpClient) {
-    // Al inicializar el servicio, cargamos todas las propiedades
-    this.getPropiedades().subscribe((data: Propiedad[]) => {
-      this.propiedades = data; // Guardamos las propiedades en la variable local
-      this.propiedadesFiltradasSubject.next(this.propiedades); // Emitimos inicialmente todas las propiedades
-    });
+
   }
 
+  private obtenerToken(): string | null {
+    return sessionStorage.getItem('token');
+  }
+
+  private crearHeaders(): HttpHeaders {
+    const token = this.obtenerToken();
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+  }
 
   // Métodos para cambiar el estado
   mostrarDetalles(id: number) {
@@ -56,17 +63,17 @@ export class PropiedadService {
   // Obtener información propiedad específica
   getPropiedadEspecifica(id: number): Observable<Propiedad> {
     const url = `${this.apiUrl}/propiedad/${id}`;
-    return this.http.get<Propiedad>(url);
+    return this.http.get<Propiedad>(url, { headers: this.crearHeaders() });
   }
 
   // Obtener todas las propiedades del backend
   getPropiedades(): Observable<Propiedad[]> {
-    return this.http.get<Propiedad[]>(`${this.apiUrl}/propiedades`);
+    return this.http.get<Propiedad[]>(`${this.apiUrl}/propiedades`, { headers: this.crearHeaders() });
   }
 
   getPropiedadesArrendador(id: number): Observable<Propiedad[]> {
     const url = `${this.apiUrl}/arrendador/${id}/propiedades`;
-    return this.http.get<Propiedad[]>(url);
+    return this.http.get<Propiedad[]>(url, { headers: this.crearHeaders() });
   }
 
   // Aplicar filtros locales
@@ -114,7 +121,7 @@ export class PropiedadService {
   }
 
   crearPropiedad(propiedadData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/crearPropiedad`, propiedadData);
+    return this.http.post(`${this.apiUrl}/crearPropiedad`, propiedadData, { headers: this.crearHeaders() });
   }
 
   eliminarPropiedad(id: number): Observable<any> {

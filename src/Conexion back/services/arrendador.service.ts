@@ -9,12 +9,12 @@ import { Arrendador } from '../models/arrendador.model';
 export class ArrendadorService {
   private apiUrl = 'http://localhost:8081/api/arrendador';
 
-  constructor(private http: HttpClient) {}
-  
+  constructor(private http: HttpClient) { }
+
   obtenerArrendador(id: number): Observable<any> {
     return this.http.get<Arrendador>(`${this.apiUrl}/arrendador/${id}`);
   }
-  
+
   crearArrendador(arrendadorData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/crearArrendador`, arrendadorData);
   }
@@ -28,5 +28,6 @@ export class ArrendadorService {
   eliminarArrendador(id: number): Observable<any> { 
     return this.http.delete(`${this.apiUrl}/eliminarArrendador/${id}`);
   }
+
 }
 
