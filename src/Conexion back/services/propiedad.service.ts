@@ -7,7 +7,7 @@ import { Propiedad } from '../../Conexion back/models/propiedad.model'; // Supon
   providedIn: 'root'
 })
 export class PropiedadService {
-  private apiUrl = 'http://localhost:8081/api/propiedad';  // Cambia la URL al puerto y host correcto de tu backend
+  private apiUrl = 'http://localhost:8080/api/propiedad';  // Cambia la URL al puerto y host correcto de tu backend
   private propiedades: Propiedad[] = []; // Almacena todas las propiedades obtenidas del backend
   private propiedadesFiltradasSubject = new BehaviorSubject<Propiedad[]>([]); // Usamos BehaviorSubject para emitir cambios
 

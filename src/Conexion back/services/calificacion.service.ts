@@ -7,7 +7,7 @@ import { Calificacion } from '../models/calificacion.model';
   providedIn: 'root'
 })
 export class CalificacionService {
-    private apiUrl = 'http://localhost:8081/api/calificacion'; 
+    private apiUrl = 'http://localhost:8080/api/calificacion'; 
     constructor(private http: HttpClient) {}
 
   getAllCalificaciones(): Observable<Calificacion[]> {
