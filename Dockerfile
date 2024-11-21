@@ -1,24 +1,34 @@
-# Etapa 1: Construcción
-FROM node:18 AS build
+# Etapa de build
+FROM node:18 AS builder
 
 WORKDIR /app
 
-# Copiar y preparar dependencias
+# Instalar dependencias
 COPY package*.json ./
 RUN npm install
 
-# Copiar el código fuente y compilar
+# Copiar el código fuente
 COPY . .
-RUN npm run build --prod
 
-# Etapa 2: Servir con Nginx
-FROM nginx:alpine
+# Construir la aplicación con SSR
+RUN npm run build
 
-# Copiar la aplicación compilada
-COPY --from=build /app/dist/ng-tailwind/browser /usr/share/nginx/html
-COPY --from=build /app/dist/ng-tailwind/3rdpartylicenses.txt /usr/share/nginx/html
+# Etapa de producción
+FROM node:18-alpine
 
-COPY ./nginx-custom.conf /etc/nginx/conf.d/default.conf
+WORKDIR /app
 
+# Copiar archivos necesarios
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/nginx-custom.conf /etc/nginx/conf.d/default.conf
+
+# Instalar solo dependencias de producción
+RUN npm ci --omit=dev
+
+# Exponer puertos
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 4000
+
+# Iniciar el servidor SSR
+CMD ["npm", "run", "serve:ssr"]

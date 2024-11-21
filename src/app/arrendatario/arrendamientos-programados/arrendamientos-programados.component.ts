@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Propiedad } from '../../../Conexion back/models/propiedad.model';
 import { Solicitud } from '../../../Conexion back/models/solicitud.model';
 import { ArrendadorService } from '../../../Conexion back/services/arrendador.service';
@@ -27,7 +27,8 @@ export class ArrendamientosProgramadosComponent {
 
   constructor(private propiedadService: PropiedadService,
     private solicitudService: SolicitudService,
-    private arrendadorService: ArrendadorService
+    private arrendadorService: ArrendadorService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -61,5 +62,9 @@ export class ArrendamientosProgramadosComponent {
         alert('Solicitud eliminada exitosamente');
       }
     );
+  }
+
+  volver(){
+    this.router.navigate(['/arrendatario']);
   }
 }

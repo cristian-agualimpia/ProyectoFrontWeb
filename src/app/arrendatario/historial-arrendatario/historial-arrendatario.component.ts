@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Propiedad } from '../../../Conexion back/models/propiedad.model';
 import { Solicitud } from '../../../Conexion back/models/solicitud.model';
 import { ArrendadorService } from '../../../Conexion back/services/arrendador.service';
@@ -24,7 +24,8 @@ export class HistorialArrendatarioComponent implements OnInit {
   constructor(
     private solicitudService: SolicitudService,
     private propiedadService: PropiedadService,
-    private arrendadorService: ArrendadorService
+    private arrendadorService: ArrendadorService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -51,5 +52,9 @@ export class HistorialArrendatarioComponent implements OnInit {
   mostrarDetalles(id: number): void {
     this.propiedadService.mostrarDetalles(id);
     console.log("Se pulsó el botón detalles en el card " + id);
+  }
+
+  volver(){
+    this.router.navigate(['/arrendatario']);
   }
 }
