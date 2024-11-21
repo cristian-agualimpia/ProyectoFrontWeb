@@ -69,8 +69,8 @@ export class HistorialArrendadorComponent implements OnInit {
     }
   }
 
-  calificarArrendador(id: number): void {
-
+  calificar(id: number, tipo: number): void {
+    this.router.navigate(['/calificar', id, tipo]);
   }
 
   volver() {

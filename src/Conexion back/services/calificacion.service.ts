@@ -31,15 +31,15 @@ export class CalificacionService {
   }
 
   crearCalificacion(calificacion: Calificacion): Observable<Calificacion> {
-    return this.http.post<Calificacion>(`${this.apiUrl}/crearcalificacion`, calificacion);
+    return this.http.post<Calificacion>(`${this.apiUrl}/crearCalificacion`, calificacion);
   }
 
   actualizarcalificacion(id: number, calificacion: Calificacion): Observable<Calificacion> {
-    return this.http.put<Calificacion>(`${this.apiUrl}/actualizarcalificacion/${id}`, calificacion);
+    return this.http.put<Calificacion>(`${this.apiUrl}/actualizarCalificacion/${id}`, calificacion);
   }
 
   eliminarcalificacion(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/eliminarcalificacion/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/eliminarCalificacion/${id}`);
   }
 
 }
