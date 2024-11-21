@@ -12,7 +12,7 @@
       <p class="text-Letra2 mt-2 text-sm leading-relaxed">Personas: {{ cantidadPersonas}}</p>
 
       <div>
-        <button (click)="aceptarSolicitud()" class="bg-Letra1 rounded-full w-full p-1 mt-3 text-white hover:bg-CheeseColorSecondary transition duration-300">Aceptar</button>
+        <button [disabled]="isButtonDisabled" (click)="aceptarSolicitud()" class="bg-Letra1 rounded-full w-full p-1 mt-3 text-white hover:bg-CheeseColorSecondary transition duration-300">{{ buttonText }}</button>
       </div>
       
     </div>
