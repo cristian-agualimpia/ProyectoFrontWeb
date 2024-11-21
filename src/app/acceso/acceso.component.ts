@@ -11,11 +11,14 @@ import { UsuarioService } from '../../Conexion back/services/usuario.service';
   styleUrls: ['./acceso.component.css']
 })
 export class AccesoComponent {
+  type: number = 1;
+  username: string = '';
+  password: string = '';
 
   constructor(
     private router: Router,
     private usuarioService: UsuarioService // Inyección de usuario.service
-  ) {}
+  ) { }
 
   onSubmit(event: Event, form: NgForm) {
     event.preventDefault(); // Evita la recarga de la página al enviar el formulario
@@ -25,15 +28,12 @@ export class AccesoComponent {
       const role = form.value.role;
       const id = Number(form.value.usuario); // Convertir a número
 
-      // Verificar si la conversión fue exitosa
-      if (isNaN(id)) {
-        console.error("El ID debe ser un número");
-        return;
-      }
 
       // Llamar a accederUsuarioDemo para manejar el tipo de usuario y redirigir
       const isArrendador = role === 'arrendador';
-      this.usuarioService.accesoUsuarioDemo(id, isArrendador);
+      this.type = isArrendador ? 1 : 2;
+
+      this.usuarioService.login(this.username, this.password, this.type);
 
       // Navegación basada en el tipo de usuario
       const routePath = isArrendador ? '/arrendador' : '/arrendatario';
