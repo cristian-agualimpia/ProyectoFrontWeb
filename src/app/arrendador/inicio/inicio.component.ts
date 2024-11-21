@@ -4,11 +4,12 @@ import { Propiedad } from '../../../Conexion back/models/propiedad.model';
 import { PropiedadService } from '../../../Conexion back/services/propiedad.service';
 import { VerticalComponentArrendador } from "../vertical/vertical.component";
 import { PropiedadesArrendadorComponent } from "../propiedades-arrendador/propiedades-arrendador.component";
+import { DetallesPropiedadComponentArrendador } from "../detalles-propiedad/detalles-propiedad.component";
 
 @Component({
   selector: 'app-inicio-arrendador',
   standalone: true,
-  imports: [CommonModule, VerticalComponentArrendador, PropiedadesArrendadorComponent],
+  imports: [CommonModule, VerticalComponentArrendador, PropiedadesArrendadorComponent, DetallesPropiedadComponentArrendador],
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css']
 })

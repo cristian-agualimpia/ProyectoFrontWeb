@@ -60,7 +60,8 @@ export class RegistroComponent {
         status: 0, // Status inicial predeterminado
         correo: this.correo,
         solicitudes: [],
-        calificaciones: []
+        calificaciones: [],
+        calificacionPromedio: 0
       }).subscribe(
         () => alert('Arrendatario registrado exitosamente'),
         (error) => console.error(error)

@@ -36,9 +36,37 @@ export class UsuarioService {
           tipoUsuario: 'arrendatario'
         };
         sessionStorage.setItem('usuario', JSON.stringify(usuarioData));
+
       });
     }
   }
+
+  // Método para actualizar solo el nombre del usuario
+actualizarNombreUsuario() {
+  const usuario = sessionStorage.getItem('usuario');
+  
+  if (!usuario) {
+    console.error('No hay usuario almacenado en sessionStorage.');
+    return;
+  }
+
+  const usuarioData = JSON.parse(usuario);
+  const { id, tipoUsuario } = usuarioData;
+
+  if (tipoUsuario === 'arrendador') {
+    this.arrendadorService.obtenerArrendador(id).subscribe(arrendador => {
+      usuarioData.nombre = arrendador.nombre;
+      sessionStorage.setItem('usuario', JSON.stringify(usuarioData));
+    });
+  } else if (tipoUsuario === 'arrendatario') {
+    this.arrendatarioService.obtenerArrendatario(id).subscribe(arrendatario => {
+      usuarioData.nombre = arrendatario.nombre;
+      sessionStorage.setItem('usuario', JSON.stringify(usuarioData));
+    });
+  } else {
+    console.error('Tipo de usuario no válido.');
+  }
+}
 
   // Método de logout para limpiar el sessionStorage
   logout() {
@@ -67,6 +95,19 @@ export class UsuarioService {
           console.error('Error en login:', error);
         }
       );
+  }
+
+
+  getUsuarioID() {
+    return this.getUsuarioData().id
+  }
+
+  getUsuarioNombre() {
+    return this.getUsuarioData().nombre
+  }
+
+  getUsuarioTipo() {
+    return this.getUsuarioData().tipoUsuario
   }
 
 

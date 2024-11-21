@@ -1,19 +1,47 @@
 <div class="flex">
     <!-- Sección de listado de propiedades -->
     <div class="flex-1 overflow-y-auto h-screen p-4">
-        <h2 class="text-2xl font-bold mb-4">Propiedades</h2>
-        <div class="space-y-4">
-        <!-- Ejemplo de propiedad -->
-        <div class="flex border border-gray-300 rounded-lg p-4 shadow-sm">
-            <img src="https://via.placeholder.com/150" alt="Imagen de la propiedad" class="w-32 h-32 object-cover rounded-l-lg">
-            <div class="ml-4 flex-1">
-            <h3 class="text-lg font-semibold">Nombre de la Propiedad</h3>
-            <p class="text-gray-600">Descripción corta de la propiedad, incluyendo características como número de habitaciones, baños, etc.</p>
-            <p class="text-green-600 font-bold">Precio por noche: $X</p>
-            <p class="text-blue-600 font-bold">Ubicacion: Crr 69d #24A-81</p>
+        <!-- Título principal -->
+        <h2 class="text-Encabezados text-2xl font-bold mb-4"> Historial de solicitudes aceptadas </h2>
+
+        <!-- Listado de propiedades -->
+        <div class="space-y-8">
+            <div *ngFor="let propiedad of propiedades" class="bg-gray-100 rounded-lg shadow-lg p-6">
+                <!-- Nombre de la propiedad -->
+                <h3 class="text-xl font-semibold text-gray-800 border-b-2 pb-2 mb-4">
+                    <span class="text-gray-600 font-bold">Nombre de la propiedad: </span> 
+                    <span class="text-red-600">{{ propiedad.nombre }}</span>
+                </h3>
+
+                <!-- Solicitudes aceptadas -->
+                <div *ngIf="propiedad.id !== undefined" class="space-y-4">
+                    <div *ngFor="let solicitud of solicitudesAceptadas[propiedad.id]" class="bg-white p-4 rounded-lg shadow-md">
+                        <!-- Información del arrendatario -->
+                        <p class="text-sm text-gray-700">
+                            <b class="text-gray-800">Nombre del arrendatario:</b> {{ nombreArrendatarios[solicitud.id!] }} <br>
+                            <span class="text-gray-600">{{ solicitud.fechaLlegada }} - {{ solicitud.fechaPartida }}</span>
+                        </p>
+
+                        <!-- Botón de calificación -->
+                        <div class="mt-4">
+                            <button 
+                                *ngIf="solicitud.id !== undefined" 
+                                (click)="calificarArrendador(solicitud.id!)" 
+                                class="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition duration-300">
+                                Calificar Arrendador
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- Puedes repetir este bloque para mostrar más propiedades -->
+
+        <!-- Botón para volver -->
+        <div class="mt-12 text-center">
+            <button
+                class="bg-gray-600 text-white font-bold px-8 py-3 rounded-full hover:bg-gray-700 transition duration-300"
+                (click)="volver()">Volver
+            </button>
         </div>
     </div>
-    
+</div>

@@ -7,4 +7,5 @@ export interface Arrendador {
     status: number;
     propiedades: [];
     calificaciones: [];
+    calificacionPromedio: number;
 }
