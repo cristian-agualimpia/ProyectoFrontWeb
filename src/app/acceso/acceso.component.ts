@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgForm, FormsModule } from '@angular/forms';
 import { UsuarioService } from '../../Conexion back/services/usuario.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-acceso',
@@ -11,35 +12,40 @@ import { UsuarioService } from '../../Conexion back/services/usuario.service';
   styleUrls: ['./acceso.component.css']
 })
 export class AccesoComponent {
-  type: number = 1;
-  username: string = '';
-  password: string = '';
+  type: number = 1; // Por defecto, arrendador
+  username: string = ''; // Usuario ingresado
+  password: string = ''; // Contraseña ingresada
+  errorMessage: string = ''; // Mensaje de error
 
   constructor(
     private router: Router,
-    private usuarioService: UsuarioService // Inyección de usuario.service
+    private usuarioService: UsuarioService // Servicio de usuario
   ) { }
 
   onSubmit(event: Event, form: NgForm) {
-    event.preventDefault(); // Evita la recarga de la página al enviar el formulario
+    event.preventDefault(); // Evitar recarga de la página al enviar el formulario
 
-    // Validar formulario y campo role
-    if (form.valid && form.value.role && form.value.usuario) {
-      const role = form.value.role;
-      const id = Number(form.value.usuario); // Convertir a número
-
-
-      // Llamar a accederUsuarioDemo para manejar el tipo de usuario y redirigir
-      const isArrendador = role === 'arrendador';
-      this.type = isArrendador ? 1 : 2;
-
-      this.usuarioService.login(this.username, this.password, this.type);
-
-      // Navegación basada en el tipo de usuario
-      const routePath = isArrendador ? '/arrendador' : '/arrendatario';
-      this.router.navigate([routePath]);
-    } else {
-      console.error("Formulario inválido o sin rol seleccionado");
+    // Validar formulario
+    if (!form.valid) {
+      this.errorMessage = 'Por favor completa todos los campos.';
+      return;
     }
+
+    // Determinar el tipo de usuario basado en el rol seleccionado
+    this.type = form.value.role === 'arrendador' ? 1 : 2;
+
+    // Llamar al servicio para iniciar sesión
+    this.usuarioService.login(this.username, this.password, this.type)
+      .subscribe({
+        next: () => {
+          // Redirigir basado en el tipo de usuario
+          const routePath = this.type === 1 ? '/arrendador' : '/arrendatario';
+          this.router.navigate([routePath]);
+        },
+        error: (err: HttpErrorResponse) => {
+          console.error('Error en login:', err);
+          this.errorMessage = 'Credenciales incorrectas. Por favor, intenta de nuevo.';
+        }
+      });
   }
 }

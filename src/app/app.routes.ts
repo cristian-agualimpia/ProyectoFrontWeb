@@ -13,25 +13,31 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { RegistroComponent } from './registro/registro.component';
 import { DetallesPropiedadComponentArrendador } from './arrendador/detalles-propiedad/detalles-propiedad.component';
 import { EdicionPropiedadComponent } from './arrendador/edicion-propiedad/edicion-propiedad.component';
+import { AuthGuard } from './guards/auth.guard';
+import { ArrendadorGuard } from './guards/arrendador.guard';
+import { ArrendatarioGuard } from './guards/arrendatario.guard';
 
 export const routes: Routes = [
-    //General
+    // General
     { path: '', component: PrincipalLandingComponent },
     { path: 'login', component: AccesoComponent },
     { path: 'register', component: RegistroComponent },
-    { path: 'arrendatario', component: InicioComponentArrendatario },
-    { path: 'arrendador', component: InicioComponentArrendador },
-    { path: 'perfil' , component: PerfilComponent},
-    //Arrendatario 
+    { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] }, // Rutas protegidas
 
-    { path: 'lista-deseos', component: ListaDeseosComponent},
-    { path: 'arrendamientos-programados', component: ArrendamientosProgramadosComponent},
-    { path: 'historial-arrendatario', component: HistorialArrendatarioComponent},
-    //arrendador
-    { path: 'historial-arrendador', component: HistorialArrendadorComponent},
-    { path: 'arrendamientos-actuales', component: ArrendamientosActualesComponent},
-    { path: 'publicar-propiedad', component: PublicarPropiedadComponent},
-    { path: 'arrendador/detalles-propiedad/:id', component: DetallesPropiedadComponentArrendador },
-    { path: 'arrendador/edicionPropiedad/:id', component: EdicionPropiedadComponent },
-    { path: '**', redirectTo: '' },// Redirige a la página principal si la ruta no se encuentra
+    // Arrendatario (protegido por rol)
+    { path: 'arrendatario', component: InicioComponentArrendatario, canActivate: [AuthGuard, ArrendatarioGuard] },
+    { path: 'lista-deseos', component: ListaDeseosComponent, canActivate: [AuthGuard, ArrendatarioGuard] },
+    { path: 'arrendamientos-programados', component: ArrendamientosProgramadosComponent, canActivate: [AuthGuard, ArrendatarioGuard] },
+    { path: 'historial-arrendatario', component: HistorialArrendatarioComponent, canActivate: [AuthGuard, ArrendatarioGuard] },
+
+    // Arrendador (protegido por rol)
+    { path: 'arrendador', component: InicioComponentArrendador, canActivate: [AuthGuard, ArrendadorGuard] },
+    { path: 'historial-arrendador', component: HistorialArrendadorComponent, canActivate: [AuthGuard, ArrendadorGuard] },
+    { path: 'arrendamientos-actuales', component: ArrendamientosActualesComponent, canActivate: [AuthGuard, ArrendadorGuard] },
+    { path: 'publicar-propiedad', component: PublicarPropiedadComponent, canActivate: [AuthGuard, ArrendadorGuard] },
+    { path: 'arrendador/detalles-propiedad/:id', component: DetallesPropiedadComponentArrendador, canActivate: [AuthGuard, ArrendadorGuard] },
+    { path: 'arrendador/edicionPropiedad/:id', component: EdicionPropiedadComponent, canActivate: [AuthGuard, ArrendadorGuard] },
+
+    // Redirección para rutas no encontradas
+    { path: '**', redirectTo: '' }, // Redirige a la página principal
 ];

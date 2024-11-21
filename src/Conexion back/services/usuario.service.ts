@@ -127,25 +127,9 @@ export class UsuarioService {
   }
 
 
-  login(username: string, password: string, type: number) {
-    const body = { username, password, type };
-    const tipo = type === 1 ? 'arrendador' : 'arrendatario';
-    const headers = {
-      'Content-Type': 'application/json',
-    };
-
-    this.http.post<{ token: string }>(`${this.apiUrl}/auth/login`, body, { headers })
-      .subscribe(
-        (response) => {
-          sessionStorage.setItem('token', response.token);
-          sessionStorage.setItem('type', tipo)
-          //this.setSessionData(response.token, tipo)// Guarda el token en sessionStorage
-          console.log('Login exitoso:', response);
-        },
-        (error) => {
-          console.error('Error en login:', error);
-        }
-      );
+  login(username: string, password: string, type: number): Observable<{ token: string }> {
+    const loginData = { username, password, type };
+    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, loginData);
   }
 
   /*setSessionData(token: string, type: string): void {
@@ -153,7 +137,7 @@ export class UsuarioService {
     document.cookie = `type=${type}; path=/; Secure; SameSite=Strict`;
   }*/
 
-
+ 
   /*getUsuarioID() {
     return this.getUsuarioData().id
   }
