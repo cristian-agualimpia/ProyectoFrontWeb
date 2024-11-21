@@ -13,6 +13,8 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { RegistroComponent } from './registro/registro.component';
 import { DetallesPropiedadComponentArrendador } from './arrendador/detalles-propiedad/detalles-propiedad.component';
 import { EdicionPropiedadComponent } from './arrendador/edicion-propiedad/edicion-propiedad.component';
+import { CalificarComponent } from './calificar/calificar.component';
+
 
 export const routes: Routes = [
     //General
@@ -22,6 +24,9 @@ export const routes: Routes = [
     { path: 'arrendatario', component: InicioComponentArrendatario },
     { path: 'arrendador', component: InicioComponentArrendador },
     { path: 'perfil' , component: PerfilComponent},
+    { path: 'calificar/:id/:tipo', component: CalificarComponent }, // Ruta para CalificarComponent
+
+
     //Arrendatario 
 
     { path: 'lista-deseos', component: ListaDeseosComponent},

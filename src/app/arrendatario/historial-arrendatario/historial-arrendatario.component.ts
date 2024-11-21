@@ -61,13 +61,11 @@ export class HistorialArrendatarioComponent implements OnInit {
     }
   }
 
-  calificarArrendador(id: number): void {
-    // Implementar lógica para calificar arrendador
-  }
+  calificarArrendador(id: number, tipo: number): void {
+    this.router.navigate(['/calificar', id, tipo]);  }
 
-  calificarPropiedad(id: number): void {
-    // Implementar lógica para calificar propiedad
-  }
+  calificarPropiedad(id: number, tipo: number): void {
+    this.router.navigate(['/calificar', id, tipo]);  }
 
   volver() {
     this.router.navigate(['/arrendatario']);

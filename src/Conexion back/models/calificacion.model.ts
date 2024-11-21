@@ -1,5 +1,5 @@
 export interface Calificacion {
-    id: number;
+    id?: number;
     calificacion: number;
     comentario: string;
     status: number;
