@@ -7,7 +7,7 @@ import { Solicitud } from '../models/solicitud.model';
   providedIn: 'root'
 })
 export class SolicitudService {
-    private apiUrl = 'http://localhost:8081/api/solicitud'; 
+    private apiUrl = 'http://localhost:8080/api/solicitud'; 
     constructor(private http: HttpClient) {}
 
   getAllSolicitudes(): Observable<Solicitud[]> {

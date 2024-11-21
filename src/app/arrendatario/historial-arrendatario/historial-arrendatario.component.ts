@@ -1,25 +1,25 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { Propiedad } from '../../../Conexion back/models/propiedad.model';
 import { Solicitud } from '../../../Conexion back/models/solicitud.model';
 import { ArrendadorService } from '../../../Conexion back/services/arrendador.service';
 import { PropiedadService } from '../../../Conexion back/services/propiedad.service';
 import { SolicitudService } from '../../../Conexion back/services/solicitud.service';
 
-
 @Component({
   selector: 'app-historial-arrendatario',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './historial-arrendatario.component.html',
   styleUrl: './historial-arrendatario.component.css'
 })
 export class HistorialArrendatarioComponent implements OnInit {
   historialSolicitudes: Solicitud[] = [];
-  propiedades: Propiedad[] = [];
-  nombreArrendadores: { [key: number]: string } = {}; // Mapeo de arrendadorId a nombre del arrendador
+  propiedades: { [key: number]: Propiedad } = {};
+  nombreArrendadores: { [key: number]: string } = {};
   fechaActual: Date = new Date();
+  idArrendatario: number = 0;
 
   constructor(
     private solicitudService: SolicitudService,
@@ -29,18 +29,18 @@ export class HistorialArrendatarioComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getUsuarioDatos();
     this.cargarHistorialArrendatario();
   }
 
   private cargarHistorialArrendatario(): void {
-    this.solicitudService.getSolicitudesByArrendatarioId(1).subscribe((solicitudes: Solicitud[]) => {
+    this.solicitudService.getSolicitudesByArrendatarioId(this.idArrendatario).subscribe((solicitudes: Solicitud[]) => {
       this.historialSolicitudes = solicitudes.filter(solicitud => new Date(solicitud.fechaPartida) < this.fechaActual);
 
       this.historialSolicitudes.forEach(solicitud => {
         this.propiedadService.getPropiedadEspecifica(solicitud.propiedadId).subscribe((propiedad: Propiedad) => {
-          this.propiedades.push(propiedad);
+          this.propiedades[solicitud.propiedadId] = propiedad;
 
-          // Obtener el nombre del arrendador de la propiedad
           this.arrendadorService.obtenerArrendador(propiedad.arrendadorId).subscribe((arrendador: any) => {
             this.nombreArrendadores[propiedad.arrendadorId] = arrendador.nombre;
           });
@@ -49,12 +49,27 @@ export class HistorialArrendatarioComponent implements OnInit {
     });
   }
 
-  mostrarDetalles(id: number): void {
-    this.propiedadService.mostrarDetalles(id);
-    console.log("Se pulsó el botón detalles en el card " + id);
+  getUsuarioDatos(): void {
+    if (typeof sessionStorage !== 'undefined') {
+      const usuarioData = sessionStorage.getItem('usuario');
+      if (usuarioData) {
+        const usuario = JSON.parse(usuarioData);
+        if (usuario.tipoUsuario === 'arrendatario') {
+          this.idArrendatario = usuario.id;
+        }
+      }
+    }
   }
 
-  volver(){
+  calificarArrendador(id: number): void {
+    // Implementar lógica para calificar arrendador
+  }
+
+  calificarPropiedad(id: number): void {
+    // Implementar lógica para calificar propiedad
+  }
+
+  volver() {
     this.router.navigate(['/arrendatario']);
   }
 }
