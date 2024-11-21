@@ -51,6 +51,6 @@ export class ListaSolicitudesComponent implements OnInit {
   }
 
   volver(){
-    this.router.navigate(['/arrendatario']);
+    this.router.navigate(['/arrendador']);
   }
 }
