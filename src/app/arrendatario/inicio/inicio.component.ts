@@ -13,6 +13,7 @@ import { VerticalComponentArrendatario } from "../vertical/vertical.component";
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css'
 })
+
 export class InicioComponentArrendatario {
   verCuenta: boolean = false;
   propiedades: Propiedad[] = [];

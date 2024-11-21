@@ -49,7 +49,7 @@ export class RegistroComponent {
       );
 
       this.usuarioService.accesoUsuarioDemo(1, true);
-      const routePath = '/arrendador';
+      const routePath = '/';
       this.router.navigate([routePath]);
     } else {
       this.arrendatarioService.crearArrendatario({
@@ -68,7 +68,7 @@ export class RegistroComponent {
       );
 
       this.usuarioService.accesoUsuarioDemo(1, false);
-      const routePath = '/arrendatario';
+      const routePath = '/';
       this.router.navigate([routePath]);
 
       console.log("Se ejecutó la condición para crear arrendatario")

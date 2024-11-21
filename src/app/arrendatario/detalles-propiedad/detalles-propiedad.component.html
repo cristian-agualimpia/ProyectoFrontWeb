@@ -60,16 +60,38 @@
 
     <!-- Contenedor de comentarios -->
     <div class="mt-6">
-        <p class="text-Encabezados2 text-3xl font-semibold mb-2">Comentarios y Calificaciones</p>
-        <div class="space-y-4 bg-white p-4 rounded-lg border">
-            <p class="text-gray-800 text-bold"> Calificación promedio: {{propiedadPedida?.calificacionPromedio}}</p>            
-            <div *ngFor="let comentario of propiedad.calificaciones" class="border rounded-lg p-3 bg-gray-50">
-                <p class="text-gray-800"><strong>{{ comentario.usuario }}:</strong> {{ comentario.comentario }}</p>
-                <p class="text-yellow-500">Calificación: {{ comentario.estrellas }}/5</p>
+        <p class="text-Encabezados2 text-3xl font-semibold mb-4 text-center">
+            Comentarios y Calificaciones
+        </p>
+        <div class="bg-white p-6 rounded-lg border">
+            <!-- Calificación promedio centrada -->
+            <p class="text-gray-800 font-bold text-center mb-6">
+                Calificación promedio: {{ propiedadPedida?.calificacionPromedio }}
+            </p>
+            <!-- Listado de comentarios -->
+            <div class="space-y-4">
+                <div 
+                    *ngFor="let comentario of propiedad.calificaciones" 
+                    class="border rounded-lg p-4 bg-gray-50 flex flex-col justify-start"
+                >
+                    <p class="text-gray-800 mb-2 flex items-center">
+                        <strong>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mr-2">
+                                <path fill-rule="evenodd" d="M4.848 2.771A49.144 49.144 0 0 1 12 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 0 1-3.476.383.39.39 0 0 0-.297.17l-2.755 4.133a.75.75 0 0 1-1.248 0l-2.755-4.133a.39.39 0 0 0-.297-.17 48.9 48.9 0 0 1-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97ZM6.75 8.25a.75.75 0 0 1 .75-.75h9a.75.75 0 0 1 0 1.5h-9a.75.75 0 0 1-.75-.75Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H7.5Z" clip-rule="evenodd" />
+                            </svg>
+                        </strong>
+                        {{ comentario.comentario }}
+                    </p>
+                    <p class="text-yellow-500">Calificación: {{ comentario.calificacion }}/5</p>
+                </div>
+                <!-- Mensaje cuando no hay comentarios -->
+                <p *ngIf="!propiedad.calificaciones.length" class="text-gray-500 text-center">
+                    Aún no hay comentarios.
+                </p>
             </div>
-            <p *ngIf="!propiedad.calificaciones.length" class="text-gray-500">Aún no hay comentarios.</p>
         </div>
     </div>
+    
 
     <!-- Botones Alquilar y Volver -->
     <div class="flex mt-10 justify-center mb-4">

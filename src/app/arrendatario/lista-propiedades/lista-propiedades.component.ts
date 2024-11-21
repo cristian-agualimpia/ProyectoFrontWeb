@@ -19,9 +19,17 @@ export class ListaPropiedadesComponentArrendatario implements OnInit {
   constructor(private propiedadService: PropiedadService) {}
 
   ngOnInit(): void {
-    // Suscribirse al BehaviorSubject de propiedades filtradas
-    this.propiedadService.propiedadesFiltradas$.subscribe((data: Propiedad[]) => {
-      this.propiedades = data;
-    });
+    this.propiedadService.getPropiedades().subscribe(
+      (data: Propiedad[]) => {
+        this.propiedades = data;
+        // Almacena las propiedades en el servicio para filtros futuros
+        this.propiedadService.propiedades = data;
+        this.propiedadService.propiedadesFiltradasSubject.next(data); // Emitir propiedades sin filtros inicialmente
+      },
+      (error) => {
+        console.error('Error al obtener propiedades:', error);
+      }
+    );
   }
+  
 }

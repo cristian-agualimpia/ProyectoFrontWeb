@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PropiedadService } from '../../../Conexion back/services/propiedad.service';
+import { UsuarioService } from '../../../Conexion back/services/usuario.service';
 
 @Component({
   selector: 'app-publicar-propiedad',
@@ -23,7 +24,7 @@ export class PublicarPropiedadComponent {
   capacidad: number = 0;
   disponible: boolean = false;
   precioXnoche: number = 0;
-  arrendadorId: number = 1;
+  arrendadorId?: number = 1;
   lavanderia: boolean = false;
   wifi: boolean = false;
   mascotas: boolean = false;
@@ -34,8 +35,11 @@ export class PublicarPropiedadComponent {
 
   constructor(
     private router: Router,
-    private propiedadService: PropiedadService
-  ) { }
+    private propiedadService: PropiedadService,
+    private usuario: UsuarioService
+  ) {
+    this.arrendadorId = usuario.getUsuarioID();
+   }
 
   onSubmit() {
     const propiedadData = {

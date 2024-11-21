@@ -14,11 +14,12 @@ import { SolicitudService } from '../../../Conexion back/services/solicitud.serv
   templateUrl: './arrendamientos-programados.component.html',
   styleUrls: ['./arrendamientos-programados.component.css']
 })
-export class ArrendamientosProgramadosComponent implements OnInit {
+export class ArrendamientosProgramadosComponent implements OnInit { 
   propiedades: { [key: number]: Propiedad } = {};
   solicitudes: Solicitud[] = [];
   nombreArrendadores: { [key: number]: string } = {};
   idArrendatario: number = 0;
+  fechaActual: Date = new Date();
 
   constructor(
     private propiedadService: PropiedadService,
@@ -29,13 +30,15 @@ export class ArrendamientosProgramadosComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsuarioDatos();
-    this.cargarSolicitudes();
+    this.cargarSolicitudesProgramadas();
   }
 
-  private cargarSolicitudes(): void {
+  private cargarSolicitudesProgramadas(): void {
     this.solicitudService.getSolicitudesByArrendatarioId(this.idArrendatario).subscribe((data: Solicitud[]) => {
-      this.solicitudes = data.filter(solicitud => solicitud.aceptacion);
+      // Filtrar solicitudes programadas (futuras)
+      this.solicitudes = data.filter(solicitud => new Date(solicitud.fechaPartida) >= this.fechaActual);
 
+      // Cargar propiedades y nombres de arrendadores
       this.solicitudes.forEach(solicitud => {
         this.propiedadService.getPropiedadEspecifica(solicitud.propiedadId).subscribe((propiedad: Propiedad) => {
           this.propiedades[solicitud.propiedadId] = propiedad;

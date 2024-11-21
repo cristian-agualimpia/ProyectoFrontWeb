@@ -30,13 +30,15 @@ export class HistorialArrendatarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsuarioDatos();
-    this.cargarHistorialArrendatario();
+    this.cargarHistorialSolicitudes();
   }
 
-  private cargarHistorialArrendatario(): void {
+  private cargarHistorialSolicitudes(): void {
     this.solicitudService.getSolicitudesByArrendatarioId(this.idArrendatario).subscribe((solicitudes: Solicitud[]) => {
+      // Filtrar solicitudes pasadas (historial)
       this.historialSolicitudes = solicitudes.filter(solicitud => new Date(solicitud.fechaPartida) < this.fechaActual);
 
+      // Cargar propiedades y nombres de arrendadores
       this.historialSolicitudes.forEach(solicitud => {
         this.propiedadService.getPropiedadEspecifica(solicitud.propiedadId).subscribe((propiedad: Propiedad) => {
           this.propiedades[solicitud.propiedadId] = propiedad;
@@ -62,12 +64,14 @@ export class HistorialArrendatarioComponent implements OnInit {
   }
 
   calificarArrendador(id: number, tipo: number): void {
-    this.router.navigate(['/calificar', id, tipo]);  }
+    this.router.navigate(['/calificar', id, tipo]);  
+  }
 
   calificarPropiedad(id: number, tipo: number): void {
-    this.router.navigate(['/calificar', id, tipo]);  }
+    this.router.navigate(['/calificar', id, tipo]);  
+  }
 
-  volver() {
+  volver(): void {
     this.router.navigate(['/arrendatario']);
   }
 }

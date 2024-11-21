@@ -7,6 +7,8 @@ import { Arrendatario } from '../../Conexion back/models/arrendatario.model';
 import { ArrendadorService } from '../../Conexion back/services/arrendador.service';
 import { ArrendatarioService } from '../../Conexion back/services/arrendatario.service';
 import { UsuarioService } from '../../Conexion back/services/usuario.service';
+import { CalificacionService } from '../../Conexion back/services/calificacion.service';
+import { Calificacion } from '../../Conexion back/models/calificacion.model';
 
 @Component({
   selector: 'app-perfil',
@@ -30,7 +32,7 @@ export class PerfilComponent implements OnInit {
 
   arrendatario?: Arrendatario;
   solicitudes:[] = [];
-  calificaciones:[] = [];
+  calificaciones?:any;
 
   arrendador?: Arrendador;
   propiedades:[]=[];
@@ -40,7 +42,8 @@ export class PerfilComponent implements OnInit {
     private router: Router,
     private arrendatarioService: ArrendatarioService,
     private arrendadorService: ArrendadorService,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private calificacionService: CalificacionService
   ){};
 
   ngOnInit(): void {
@@ -69,7 +72,15 @@ export class PerfilComponent implements OnInit {
         this.calificacionPromedio = arrendatario.calificacionPromedio;
 
         }); }
-
+        if (this.rol === 'arrendador') {
+          this.calificacionService.getCalificacionesByArrendadorId(this.id).subscribe(calificaciones => {
+            this.calificaciones = calificaciones;
+          });
+        } else if (this.rol === 'arrendatario') {
+          this.calificacionService.getCalificacionesByArrendatarioId(this.id).subscribe(calificaciones => {
+            this.calificaciones = calificaciones;
+          });
+        }
     }
 
   openModal(): void {
@@ -178,5 +189,10 @@ export class PerfilComponent implements OnInit {
 
   changeImage(): void {
     console.log("Cambiar imagen de perfil");
+  }
+
+  volver(): void {
+    const ruta = this.rol === 'arrendador' ? '/arrendador' : '/arrendatario';
+    this.router.navigate([ruta]);
   }
 }

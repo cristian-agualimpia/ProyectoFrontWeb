@@ -45,8 +45,8 @@ export class BarraBusquedaComponentArrendatario {
       lavanderia: this.lavanderia,
       alimentacion: this.alimentacion,
       mascotas: (this.mascotas > 0),
-      ubicacion: this.ubicacion,
-      nombre: this.nombre
+     // ubicacion: this.ubicacion,
+    //  nombre: this.nombre
     });
     this.propiedadService.ocultarDetalles()
   }
