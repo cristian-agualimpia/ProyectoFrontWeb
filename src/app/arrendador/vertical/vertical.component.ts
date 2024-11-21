@@ -11,15 +11,15 @@ import { UsuarioService } from '../../../Conexion back/services/usuario.service'
   styleUrl: './vertical.component.css'
 })
 export class VerticalComponentArrendador {
-  nombreUsuario?:string;
+  nombreUsuario?: string;
 
   constructor(
     private usuarioService: UsuarioService
   ) {
-    this.nombreUsuario = usuarioService.getUsuarioNombre()
+    this.nombreUsuario = " usuarioService.getUsuarioNombre()"
   }
 
-  cerrarSesion(){
+  cerrarSesion() {
     this.usuarioService.logout();
   }
 }

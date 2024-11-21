@@ -25,7 +25,8 @@ export class ArrendadorService {
     return this.http.put(url, arrendador, { headers });
   }
 
-  eliminarArrendador(id: number): Observable<any> { 
+
+  eliminarArrendador(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/eliminarArrendador/${id}`);
   }
 

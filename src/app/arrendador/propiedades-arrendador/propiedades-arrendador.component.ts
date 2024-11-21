@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Propiedad } from '../../../Conexion back/models/propiedad.model';
 import { PropiedadService } from '../../../Conexion back/services/propiedad.service';
 import { CardArrendadorComponent } from '../card-arrendador/card-arrendador.component';
+import { UsuarioService } from '../../../Conexion back/services/usuario.service';
 
 
 @Component({
@@ -18,28 +19,27 @@ export class PropiedadesArrendadorComponent implements OnInit {
   propiedades: Propiedad[] = [];
   idArrendador: number = 0;
 
-  constructor(private propiedadService: PropiedadService) {}
+  constructor(private propiedadService: PropiedadService, private userService: UsuarioService) { }
 
   ngOnInit(): void {
-    this.getUsuarioDatos();
-    if (this.idArrendador) {
-      this.propiedadService.getPropiedadesArrendador(this.idArrendador).subscribe((data: Propiedad[]) => {
-        this.propiedades = data;
-      });
-    }
+    this.getPropiedadesLogged();
   }
 
-  getUsuarioDatos(): void {
+  getPropiedadesLogged(): void {
     // Verificar si sessionStorage está disponible
-    if (typeof sessionStorage !== 'undefined') {
-      const usuarioData = sessionStorage.getItem('usuario');
-      if (usuarioData) {
-        const usuario = JSON.parse(usuarioData);
-        if (usuario.tipoUsuario === 'arrendador') {
-          this.idArrendador = usuario.id;
-        }
+    this.userService.getUsuarioData().subscribe(usuario => {
+      if (!usuario) {  // Aquí verificamos si usuario es undefined o null
+        console.error('No hay usuario almacenado en sessionStorage.');
+        return;
       }
-    }
+
+      // Si llegamos aquí, significa que `usuario` no es undefined o null
+      this.idArrendador = usuario.id;
+      console.log('ID del arrendador:', this.idArrendador);
+      this.propiedadService.getPropiedadesArrendador(this.idArrendador).subscribe(propiedades => {
+        this.propiedades = propiedades;
+      });
+    });
   }
 
 }
